@@ -1,0 +1,30 @@
+option java_package = "com.idamobile.instabank.dto.protobuf";
+option java_outer_classname = "Locations";
+
+import "Commons.proto";
+
+message LocationServiceProtobufDTO {
+	required string serviceId 			= 1;
+    required string name 				= 2;
+    optional string parentId 			= 3;
+    optional string description 		= 4;
+}
+
+message LocationTypeProtobufDTO {
+    required string locationTypeId 		= 1;
+    repeated string attributeKeys 		= 2;
+    required string kind 				= 3;
+}
+
+message LocationProtobufDTO {
+	required string locationId 			= 1;
+    required double latitude 			= 2;
+    required double longitude 			= 3;
+    required string locationTypeId 		= 4;
+    optional string address 			= 5;
+    optional string name 				= 6;
+    optional string operationTime 		= 7;
+    repeated FieldValueProtobufDTO attributes = 8;
+    repeated string serviceIds = 9;
+    optional string city = 10;
+}

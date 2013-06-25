@@ -1,0 +1,97 @@
+option java_package = "com.idamobile.instabank.dto.protobuf.v2";
+option java_outer_classname = "Entities";
+
+enum CommentType_v2 {
+    REGULAR							= 0;
+    UNSUBSCRIBE						= 1;
+}
+
+enum TransactionStatus_v2 {
+    PENDING							= 0;
+    FIXED							= 1;
+    ERROR							= 2;
+}
+
+enum TransactionType_v2 {
+    WITHDRAWAL						= 0;
+    DEPOSIT							= 1;
+    PURCHASE						= 2;
+    TRANSFER						= 3;
+}
+
+enum TransactionClass_v2 {
+    ATM_OR_TERMINAL				= 0;
+    INTERNET_BANK				= 1;
+    INTERNET_PURCHASE			= 2;
+    PHYSICAL_PURCHASE			= 3;
+    INTERNAL_TRANSFER			= 4;
+    ABS_BALANCE_CHANGE			= 5;
+    NOT_CLASSIFIED				= 6;
+}
+
+enum TerminalType_v2 {
+    ATM								= 0;
+    POS								= 1;
+
+    /* Don't have any idea what it is. Never seen in real life */
+    CRT 							= 2;
+    Internet						= 3;
+}
+
+enum CardOrderStatus_v2 {
+    NOT_ORDERED						= 0;
+    HAS_ORDER						= 1;
+    SENT_TO_BANK					= 2;
+    EMITTED							= 3;
+}
+
+message CommentProtobufDTO_v2 {
+    required string commentId		    = 1;
+    required string userId			    = 2;
+    required string message		   	    = 3;
+    required int64 timestamp    		= 4;
+    required CommentType_v2 type 		= 5;
+}
+
+message EnvelopeProtobufDTO_v2 {
+    optional string message			= 1;
+    optional string imageResourceId	= 2;
+    optional string locationId		= 3;
+}
+
+message TransactionProtobufDTO_v2 {
+	required string transactionId					= 1;
+	required int64 amount							= 2;
+	required int64 createdWhen 						= 3;
+	required int64 modifiedWhen						= 4;
+	required TransactionStatus_v2 status 				= 5;
+	required EnvelopeProtobufDTO_v2 envelope 			= 6;
+	optional string systemMessage					= 7;
+	optional string payeeId							= 8;
+	optional string payerId							= 9;
+	optional string predefinedLocationId			= 10;
+	repeated CommentProtobufDTO_v2 comments			= 11;
+
+	/* Mapped category from Foursquare */
+	optional string categoryId					    = 12;
+	optional TerminalType_v2 terminalType 				= 13;
+	required TransactionType_v2 transactionType 		= 14;
+	required TransactionClass_v2 transactionClass 		= 15;
+}
+
+message MoneyRequestProtobufDTO_v2 {
+	required string orderId							= 1;
+	required string ownerId							= 2;
+	required EnvelopeProtobufDTO_v2 envelope       	= 3;
+	required int64 amount							= 5;
+	required int64 createdWhen						= 6;
+	required int64 modifiedWhen						= 7;
+	repeated string participantIds					= 8;
+	repeated CommentProtobufDTO_v2 comments			= 9;
+	repeated TransactionProtobufDTO_v2 transactions	= 10;	
+}
+
+message EntityContainerProtobufDTO_v2 {
+	optional MoneyRequestProtobufDTO_v2 moneyRequest	 	= 1;
+	optional TransactionProtobufDTO_v2 transaction 	       	= 2;
+}

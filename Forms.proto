@@ -1,0 +1,79 @@
+option java_package = "com.idamobile.instabank.dto.protobuf";
+option java_outer_classname = "Forms";
+
+message Form {
+    required string id = 1;
+    repeated FormField fields = 5;
+    optional bool hasNext = 7;
+    optional bool requiresCommission = 8;
+}
+
+message FormField {
+    required string id = 1;
+    optional string name = 2;
+    required int32 formOrder = 3;
+    optional int64 minLimit = 4;
+    optional int64 maxLimit = 5;
+    optional string regExp = 6;
+    optional string defaultValue = 7;
+    /* Is required for all fields presented to user (i.e. is omitted for HIDDEN) */
+    optional bool mandatory = 8;
+    optional string errorMessage = 9;
+    optional string hint = 10;
+    optional bool readOnly = 11;
+    required FieldClass fieldClass = 12;
+    repeated ComboBoxValue comboBoxValues = 13;
+
+    enum FieldClass {
+        SINGLE_LINE_TEXT = 1;
+        MULTI_LINE_TEXT = 2;
+        CHECK_BOX = 3;
+        PASSWORD = 4;
+	/* Date with yyyy/MM precision in GMT0
+	   min and max limits, defaultValue are in unix time format */
+        MONTH_YEAR = 5;
+	/* Date with yyyy/MM/hh precision in GMT0
+	   min and max limits, defaultValue are in unix time format */
+        DATE = 6;
+        COMBO_BOX = 7;
+        MONEY = 8;
+        PHONE = 9;
+        USER_ACCOUNT = 10;
+        AMOUNT = 11;
+        SOURCE_ACCOUNT = 12;
+        HIDDEN = 13;
+        NUMERIC = 14;
+        DECIMAL = 15;
+    }
+}
+
+message FieldValue {
+    required string formFieldId = 1;
+    optional string value = 2;
+}
+
+message FilledForm {
+    required string formId = 1;
+    repeated FieldValue values = 2;
+}
+
+message ComboBoxValue {
+    required string name = 1;
+    required string value = 2;
+    optional int32 order = 3;
+}
+
+message Beneficiary {
+    required string id = 1;
+    required string name = 2;
+
+    required Form   form = 3;
+    optional string logoResource = 4;
+}
+
+message BeneficiaryCategory {
+    required string id = 1;
+    required string name = 2;
+    optional string logoResource = 3;
+    repeated Beneficiary beneficiaries = 4;
+}
