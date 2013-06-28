@@ -4,53 +4,54 @@ option java_outer_classname = "Entities";
 import "Commons.proto";
 
 message TransactionProtobufDTO {
-	required string transactionId					= 1;
-	required int64 amount							= 2;
-	required int64 createdWhen 						= 3;
-	required int64 modifiedWhen						= 4;
-	required TransactionStatus status 				= 5;
-	required EnvelopeProtobufDTO envelope 			= 6;
-	optional string systemMessage					= 7;
-	optional string payeeId							= 8;
-	optional string payerId							= 9;
-	optional string predefinedLocationId			= 10;
-	repeated CommentProtobufDTO comments			= 11;
+    required string transactionId                    = 1;
+    required int64 amount                            = 2;
+    required int64 createdWhen                         = 3;
+    required int64 modifiedWhen                        = 4;
+    required TransactionStatus status                 = 5;
+    required EnvelopeProtobufDTO envelope             = 6;
+    optional string systemMessage                    = 7;
+    optional string payeeId                            = 8;
+    optional string payerId                            = 9;
+    optional string predefinedLocationId            = 10;
+    repeated CommentProtobufDTO comments            = 11;
 
-	/* Mapped category from Foursquare */
-	optional string categoryId					    = 12;
-	optional TerminalType terminalType 				= 13;
-	required TransactionType transactionType 		= 14;
-	required TransactionClass transactionClass 		= 15;
+    /* Mapped category from Foursquare */
+    optional string categoryId                        = 12;
+    optional TerminalType terminalType                 = 13;
+    required TransactionType transactionType         = 14;
+    required TransactionClass transactionClass         = 15;
 
-	/* True if terminal was not bound
-	*  and location is guessed by location 
-	*  and city. 
-	*  This parameter makes sense only for 
-	*  external transactions.
-	*/
-	optional bool isGuess							= 16;
+    /* True if terminal was not bound
+    *  and location is guessed by location 
+    *  and city. 
+    *  This parameter makes sense only for 
+    *  external transactions.
+    */
+    optional bool isGuess                            = 16;
 
-	/**
-	* Populated if transactionClass == BENEFICIARY_PAYMENT
-	*/
-	optional string beneficiaryId					= 17;
-	optional int64 transactionAmount                = 18;
+    /**
+    * Populated if transactionClass == BENEFICIARY_PAYMENT
+    */
+    optional string beneficiaryId                    = 17;
+    optional int64 transactionAmount                = 18;
+    // ISO 4217
     optional int32 transactionCurrency              = 19;
 }
 
 message MoneyRequestProtobufDTO {
-	required string orderId							= 1;
-	required string ownerId							= 2;
-	required EnvelopeProtobufDTO envelope 			= 3;
-	required int64 amount							= 5;
-	required int64 createdWhen						= 6;
-	required int64 modifiedWhen						= 7;
-	repeated string participantIds					= 8;
-	repeated CommentProtobufDTO comments			= 9;
-	repeated TransactionProtobufDTO transactions	= 10;	
+    required string orderId                            = 1;
+    required string ownerId                            = 2;
+    required EnvelopeProtobufDTO envelope             = 3;
+    required int64 amount                            = 5;
+    required int64 createdWhen                        = 6;
+    required int64 modifiedWhen                        = 7;
+    repeated string participantIds                    = 8;
+    repeated CommentProtobufDTO comments            = 9;
+    repeated TransactionProtobufDTO transactions    = 10;    
 }
 
 message EntityContainerProtobufDTO {
-	optional MoneyRequestProtobufDTO moneyRequest	 	= 1;
-	optional TransactionProtobufDTO transaction 		= 2;
+    optional MoneyRequestProtobufDTO moneyRequest         = 1;
+    optional TransactionProtobufDTO transaction         = 2;
 }
