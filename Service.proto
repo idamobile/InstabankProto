@@ -33,7 +33,7 @@ message DiagnosticMessageProtobufDTO {
 // endpoint URL: "/registerWithFacebook"
 message RegisterWithFacebookRequestProtobufDTO {
     required string accessToken = 1;
-    optional int64 phoneNumber = 2;
+    optional string phoneNumber = 2;
 }
 
 // endpoint URL: "/loginWithFacebookAndPin" -> LoginResponseProtobufDTO
@@ -105,7 +105,7 @@ message GetOptionsStatusesResponseProtobufDTO {
     required bool socialConfidantEstablished    = 2;
     optional string socialConfidantFacebookId   = 3;
     optional bool phoneNumberEstablished        = 4;
-    optional int64 phoneNumber                 = 5;
+    optional string phoneNumber                 = 5;
 }
 
 //endpoint URL: "/establishPin"
@@ -118,7 +118,7 @@ message EstablishPinResponseProtobufDTO {
 
 // endpoint URL: "/establishPhoneNumber"
 message EstablishPhoneNumberRequestProtobufDTO {
-    required int64 phoneNumber         = 1;
+    required string phoneNumber         = 1;
 }
 
 message EstablishPhoneNumberResponseProtobufDTO {
