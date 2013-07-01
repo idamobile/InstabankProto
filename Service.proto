@@ -365,7 +365,7 @@ message GetTerminalAccountRequisitesProtobufResponseDTO {
 // Order Creation Section
 //
 // endpoint URL: "/createRequestMoney"
-// returns MoneyRequestProtobufDTO 
+// returns MoneyRequestProtobufDTO
 message CreateRequestMoneyRequestProtobufDTO {
     required EnvelopeProtobufDTO envelope = 1;
     required int64 amount = 2;
@@ -377,7 +377,7 @@ message CreateRequestMoneyRequestProtobufDTO {
 
 
 // endpoint URL: "/createTransferMoney"
-// returns TransactionProtobufDTO 
+// returns TransactionProtobufDTO
 message CreateTransferMoneyRequestProtobufDTO {
     required EnvelopeProtobufDTO envelope               = 1;
     required int64 amount                               = 2;
@@ -388,7 +388,7 @@ message CreateTransferMoneyRequestProtobufDTO {
 }
 
 // endpoint URL: "/describeEntity"
-// returns EntityContainerProtobufDTO 
+// returns EntityContainerProtobufDTO
 message DescribeEntityRequestProtobufDTO {
     required EnvelopeProtobufDTO envelope = 1;
     // moneyRequest ID or transaction ID
@@ -400,7 +400,7 @@ message DescribeEntityRequestProtobufDTO {
 //
 
 // endpoint URL: "/editParticipants"
-// returns MoneyRequestProtobufDTO 
+// returns MoneyRequestProtobufDTO
 message EditParticipantsRequestProtobufDTO {
     required string orderId = 1;
     repeated string participantIds = 2;
@@ -428,10 +428,10 @@ message FetchSingleEntityRequestProtobufDTO {
     required string entityId = 1;
 }
 
-// -- end of Order Retrieval Section -- 
+// -- end of Order Retrieval Section --
 
 // endpoint URL: "/fulfillMoneyRequest"
-// returns MoneyRequestProtobufDTO 
+// returns MoneyRequestProtobufDTO
 message FulfillMoneyRequestRequestProtobufDTO {
     required string orderId                             = 1;
     required int64 amount                               = 2;
@@ -453,14 +453,14 @@ message RemoveOrderRequestProtobufDTO {
 }
 
 // endpoint URL: "/commentOrder"
-// returns EntityContainerProtobufDTO 
+// returns EntityContainerProtobufDTO
 message CommentOrderRequestProtobufDTO {
     required string orderId = 1;
     required string message = 2;
 }
 
 // endpoint URL: "/editComment"
-// returns EntityContainerProtobufDTO 
+// returns EntityContainerProtobufDTO
 message EditCommentRequestProtobufDTO {
     required string commentId = 1;
     optional string message = 2;
@@ -522,7 +522,7 @@ message IsVersionCompatibleResponseProtobufDTO {
 // endpoint URL: "/getLocations"
 // returns: LocationsResponseProtobufDTO
 message LocationsRequestProtobufDTO {
-    optional int64 lastUpdateTime                       = 1;    
+    optional int64 lastUpdateTime                       = 1;
 }
 
 message LocationsResponseProtobufDTO {
@@ -582,6 +582,24 @@ message GetNextFormProtobufResponseDTO {
     required FilledForm filledFormDTO    = 1;
     required Form formDTO                = 2;
 }
+
+//endpoint URL: GET "/getTemplates"
+message GetTemplatesProtobufResponseDTO {
+    repeated Template templates = 1;
+}
+
+//endpoint URL: "/makeTemplate"
+//return MakeTemplateResponseDTO
+message MakeTemplateProtobufRequestDTO {
+    required string name = 1;
+    required string beneficiaryId = 2;
+    required FilledForm filledForm = 3;
+}
+
+message MakeTemplateProtobufResponseDTO {
+    required Template template = 1;
+}
+
 
 //endpoint URL: "/inviteFriends"
 // deprecated
