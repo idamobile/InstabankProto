@@ -30,13 +30,13 @@ message TransactionProtobufDTO {
     */
     optional bool isGuess                            = 16;
 
-    /**
-    * Populated if transactionClass == BENEFICIARY_PAYMENT
-    */
-    optional string beneficiaryId                    = 17;
-    optional int64 transactionAmount                = 18;
+	/**
+	* Populated if transactionClass == BENEFICIARY_PAYMENT
+	*/
+	optional string beneficiaryId					= 17;
+	optional int64 transactionAmount                = 18;
     // ISO 4217
-    optional int32 transactionCurrency              = 19;
+    optional string transactionCurrency             = 19;
 }
 
 message MoneyRequestProtobufDTO {
