@@ -23,6 +23,7 @@ message FormField {
     optional bool readOnly = 11;
     required FieldClass fieldClass = 12;
     repeated ComboBoxValue comboBoxValues = 13;
+    optional string mask = 14;
 
     enum FieldClass {
         SINGLE_LINE_TEXT = 1;
