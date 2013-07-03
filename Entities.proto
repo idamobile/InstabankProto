@@ -34,9 +34,18 @@ message TransactionProtobufDTO {
 	* Populated if transactionClass == BENEFICIARY_PAYMENT
 	*/
 	optional string beneficiaryId					= 17;
-	optional int64 transactionAmount                = 18;
-    // ISO 4217
-    optional string transactionCurrency             = 19;
+
+    /* Transaction amount in currency of transaction */
+	optional int64 originalCurrencyAmount           = 18;
+
+    /* Original transaciton currency. 3-character ISO-4217 code */
+    optional string originalCurrency                = 19;
+
+    /* Remaining balance after transaction is completed */
+    optional int64  remainingBalance                = 20;
+
+    /* Currency of the account */
+    optional string balanceCurrency                 = 21;
 }
 
 message MoneyRequestProtobufDTO {
