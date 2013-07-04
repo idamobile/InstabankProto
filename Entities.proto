@@ -43,9 +43,6 @@ message TransactionProtobufDTO {
 
     /* Remaining balance after transaction is completed */
     optional int64  remainingBalance                = 20;
-
-    /* Currency of the account */
-    optional string balanceCurrency                 = 21;
 }
 
 message MoneyRequestProtobufDTO {
