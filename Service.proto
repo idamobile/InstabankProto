@@ -63,7 +63,6 @@ message LoginResponseProtobufDTO {
         PIN_CHECK_FAILED {LoginWithFacebookAndPinRequestProtobufDTO} if incorrect pin
         PIN_BANNED {LoginWithFacebookAndPinRequestProtobufDTO} if pin banned
         CODE_CHECK_FAILED {LoginWithFacebookAndPinRecoveryCodeRequestProtobufDTO} if pin recovery code check failed
-        CODE_NOT_ESTABLISHED {LoginWithFacebookAndPinRecoveryCodeRequestProtobufDTO} if pin recovery code not established
         CODE_BLOCKED {LoginWithFacebookAndPinRecoveryCodeResponseDTO} if pin recovery code was blocked
     * 400 Bad Request
         PHONE_REQUIRED {RegisterWithFacebookRequestProtobufDTO} if phone number required for registration
