@@ -63,7 +63,7 @@ message LoginResponseProtobufDTO {
         PIN_CHECK_FAILED {LoginWithFacebookAndPinRequestProtobufDTO} if incorrect pin
         PIN_BANNED {LoginWithFacebookAndPinRequestProtobufDTO} if pin banned
         CODE_CHECK_FAILED {LoginWithFacebookAndPinRecoveryCodeRequestProtobufDTO} if pin recovery code check failed
-        CODE_BLOCKED {LoginWithFacebookAndPinRecoveryCodeResponseDTO} if pin recovery code was blocked
+        CODE_BLOCKED {LoginWithFacebookAndPinRecoveryCodeRequestProtobufDTO} if pin recovery code was blocked
     * 400 Bad Request
         PHONE_REQUIRED {RegisterWithFacebookRequestProtobufDTO} if phone number required for registration
     */
@@ -143,7 +143,7 @@ message SendPinRecoveryCodeResponseProtobufDTO {
     /* 412 Precondition Failed if pin not established for user
         PIN_NOT_ESTABLISHED if pin not established for user
         SOCIAL_CONFIDANT_NOT_ESTABLISHED if social confidant not established for used
-        PIN_NOT_BANNED if user didn't request recovery code
+        PIN_NOT_BANNED
     * 401 Unauthorized with protobuf entity DiagnosticMessageProtobufDTO which contains
         IS_NOT_REGISTERED if this facebook user is not registered in system - use /registerWithFacebook
         FACEBOOK_INVALID_CREDENTIALS if incorrect facebook credentials
