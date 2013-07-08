@@ -621,3 +621,15 @@ message SearchActivitiesRequestProtobufDTO {
 message SearchActivitiesResponseProtobufDTO {
     repeated EntityContainerProtobufDTO items   = 2;
 }
+
+//endpoint URL: "/getTransactionDescription"
+// returns OK(200) or PRECONDITION_FAILED(412) in case of transaction not owned by user
+message GetTransactionDescriptionRequestProtobufDTO {
+    required string transactionId  = 1;
+}
+
+message GetTransactionDescriptionResponseProtobufDTO {
+    required Form form = 1;
+    required FilledForm filledForm = 2;
+    required string beneficiaryId = 3;
+}
