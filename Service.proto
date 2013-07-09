@@ -623,7 +623,7 @@ message SearchActivitiesResponseProtobufDTO {
 }
 
 //endpoint URL: "/getTransactionDescription"
-// returns OK(200) or PRECONDITION_FAILED(412) in case of transaction not owned by user
+// returns OK(200) or FORBIDDEN(403) in case of transaction not owned by user
 message GetTransactionDescriptionRequestProtobufDTO {
     required string transactionId  = 1;
 }
