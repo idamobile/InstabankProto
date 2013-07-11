@@ -3,26 +3,14 @@ option java_package = "com.idamobile.instabank.dto.protobuf";
 option java_outer_classname = "Service";
 
 import "Commons.proto";
-
 import "Entities.proto";
-
 import "Events.proto";
-
 import "Wallets.proto";
-
 import "Social.proto";
-
 import "Notifications.proto";
-
 import "CardStore.proto";
 import "Locations.proto";
-
 import "Forms.proto";
-
-/**
- * @author Dmitry Spikhalskiy
- * @since 12.09.12
- */
 
 message DiagnosticMessageProtobufDTO {
     required string info = 1;
@@ -72,11 +60,11 @@ message LoginResponseProtobufDTO {
         OK = 1;
     }
 
-    required Status status                      = 1;
-    optional string sessionId                   = 2;
-    optional string userId                      = 3;
-    required CardOrderStatus cardOrderStatus    = 4;
-    optional bool newOfferContractExists        = 5;
+    required Status status = 1;
+    optional string sessionId = 2;
+    optional string userId = 3;
+    required CardOrderStatus cardOrderStatus = 4;
+    optional bool newOfferContractExists = 5;
 }
 
 //** LOGIN END **//
@@ -100,11 +88,11 @@ message GetRemainingPinAttemptsResponseProtobufDTO {
 
 //endpoint URL: GET "/getOptionsStatusesResponse"
 message GetOptionsStatusesResponseProtobufDTO {
-    required bool pinEstablished                = 1;
-    required bool socialConfidantEstablished    = 2;
-    optional string socialConfidantFacebookId   = 3;
-    optional bool phoneNumberEstablished        = 4;
-    optional string phoneNumber                 = 5;
+    required bool pinEstablished = 1;
+    required bool socialConfidantEstablished = 2;
+    optional string socialConfidantFacebookId = 3;
+    optional bool phoneNumberEstablished = 4;
+    optional string phoneNumber = 5;
 }
 
 //endpoint URL: "/establishPin"
@@ -117,7 +105,7 @@ message EstablishPinResponseProtobufDTO {
 
 // endpoint URL: "/establishPhoneNumber"
 message EstablishPhoneNumberRequestProtobufDTO {
-    required string phoneNumber         = 1;
+    required string phoneNumber = 1;
 }
 
 message EstablishPhoneNumberResponseProtobufDTO {
@@ -215,14 +203,14 @@ message GetInstabankIdsResponseProtobufDTO {
 
 //endpoint URL: "/registerDevicePushId"
 message RegisterDevicePushIdRequestProtobufDTO {
-    required string devicePushId    = 1;
+    required string devicePushId = 1;
 
     enum Platform {
-        IOS             = 0;
-        ANDROID         = 1;
+        IOS = 0;
+        ANDROID = 1;
     }
 
-    optional Platform platform      = 2 [default = IOS];
+    optional Platform platform = 2 [default = IOS];
 }
 
 message RegisterDevicePushIdResponseProtobufDTO {
@@ -230,17 +218,17 @@ message RegisterDevicePushIdResponseProtobufDTO {
 
 // endpoint URL: "/remindAboutOrder"
 message RemindAboutOrderRequestProtobufDTO {
-    required string orderId         = 1;
-    optional string text            = 2;
+    required string orderId = 1;
+    optional string text = 2;
 }
 
 message RemindAboutOrderResponseProtobufDTO {
     enum Status {
-        OK                          = 0;
-        ATTEMPTS_COUNT_EXCEEDED     = 1;
-        REMINDING_TOO_SOON          = 2;
+        OK = 0;
+        ATTEMPTS_COUNT_EXCEEDED = 1;
+        REMINDING_TOO_SOON = 2;
     }
-    optional Status status          = 1;
+    optional Status status = 1;
 }
 
 // endpoint URL: "/getAccountsStatus"
@@ -378,12 +366,12 @@ message CreateRequestMoneyRequestProtobufDTO {
 // endpoint URL: "/createTransferMoney"
 // returns TransactionProtobufDTO
 message CreateTransferMoneyRequestProtobufDTO {
-    required EnvelopeProtobufDTO envelope               = 1;
-    required int64 amount                               = 2;
-    required string recipientId                         = 3;
-    required bool existingUser                          = 4;
-    optional string accessToken                         = 5;
-    optional string requestId                           = 6;
+    required EnvelopeProtobufDTO envelope = 1;
+    required int64 amount = 2;
+    required string recipientId = 3;
+    required bool existingUser = 4;
+    optional string accessToken = 5;
+    optional string requestId = 6;
 }
 
 // endpoint URL: "/describeEntity"
@@ -432,10 +420,10 @@ message FetchSingleEntityRequestProtobufDTO {
 // endpoint URL: "/fulfillMoneyRequest"
 // returns MoneyRequestProtobufDTO
 message FulfillMoneyRequestRequestProtobufDTO {
-    required string orderId                             = 1;
-    required int64 amount                               = 2;
-    optional string message                             = 3;
-    optional string requestId                           = 4;
+    required string orderId = 1;
+    required int64 amount = 2;
+    optional string message = 3;
+    optional string requestId = 4;
 }
 
 // endpoint URL: "/unsubscribe"
@@ -471,9 +459,9 @@ message EditCommentRequestProtobufDTO {
 // endpoint URL: "/withdraw"
 // HTTP 422 on negative amount
 message WithdrawRequestProtobufDTO {
-    required int64 amount       = 1;
+    required int64 amount = 1;
     //payment's details
-    optional string message     = 2;
+    optional string message = 2;
     /* keys:
     *  "CUSTOMER_NAME"
     *  "BIK"
@@ -486,18 +474,18 @@ message WithdrawRequestProtobufDTO {
 // returns GetExternalTransferCommissionResponseProtobufDTO
 // 422 on wrong requisites
 message GetExternalTransferCommissionRequestProtobufDTO {
-    required int64 amount                       = 1;
+    required int64 amount = 1;
     /* keys:
     *  "CUSTOMER_NAME"
     *  "BIK"
     *  "ACCOUNT_NUMBER"
     *  TODO: consider creating separate DTO for requisites
     */
-    repeated FieldValueProtobufDTO requisites   = 2;
+    repeated FieldValueProtobufDTO requisites = 2;
 }
 
 message GetExternalTransferCommissionResponseProtobufDTO {
-    required int64 commissionAmount              = 1;
+    required int64 commissionAmount = 1;
 }
 
 
@@ -521,17 +509,17 @@ message IsVersionCompatibleResponseProtobufDTO {
 // endpoint URL: "/getLocations"
 // returns: LocationsResponseProtobufDTO
 message LocationsRequestProtobufDTO {
-    optional int64 lastUpdateTime                       = 1;
+    optional int64 lastUpdateTime = 1;
 }
 
 message LocationsResponseProtobufDTO {
-    repeated LocationProtobufDTO modifiedLocations          = 1;
-    repeated string removedLocationIds                      = 2;
-    repeated LocationServiceProtobufDTO modifiedServices    = 3;
-    repeated string removedServiceIds                       = 4;
-    repeated LocationTypeProtobufDTO modifiedLocationTypes  = 5;
-    repeated string removedLocationTypeIds                  = 6;
-    required int64 lastUpdateTime                           = 7;
+    repeated LocationProtobufDTO modifiedLocations = 1;
+    repeated string removedLocationIds = 2;
+    repeated LocationServiceProtobufDTO modifiedServices = 3;
+    repeated string removedServiceIds = 4;
+    repeated LocationTypeProtobufDTO modifiedLocationTypes = 5;
+    repeated string removedLocationTypeIds = 6;
+    required int64 lastUpdateTime = 7;
 }
 
 //endpoint URL: agreeWithOfferContract
@@ -546,14 +534,14 @@ message GetBeneficiaryCategoriesRequestProtobufDTO {
 }
 
 message GetBeneficiaryCategoriesResponseProtobufDTO {
-    optional string dataHash               = 1;
+    optional string dataHash = 1;
     repeated BeneficiaryCategory beneficiaryCategories = 2;
 }
 
 //endpoint URL: "/getPaymentCommission"
 //return: GetPaymentCommissionResponseProtobufDTO
 message GetPaymentCommissionRequestProtobufDTO {
-    required FilledForm filledForm     = 1;
+    required FilledForm filledForm = 1;
 }
 
 message GetPaymentCommissionResponseProtobufDTO {
@@ -565,9 +553,9 @@ message GetPaymentCommissionResponseProtobufDTO {
 // 422 on wrong requisites or invalid amount
 message PerformPaymentProtobufRequestDTO {
     required FilledForm filledFormDTO = 1;
-    required int64 amount             = 2;
-    required int64 commission         = 3;
-    required string beneficiaryId      = 4;
+    required int64 amount = 2;
+    required int64 commission = 3;
+    required string beneficiaryId = 4;
 }
 
 //endpoint URL: "/getNextPaymentForm"
@@ -578,8 +566,8 @@ message GetNextFormProtobufRequestDTO {
 }
 
 message GetNextFormProtobufResponseDTO {
-    required FilledForm filledFormDTO    = 1;
-    required Form formDTO                = 2;
+    required FilledForm filledFormDTO = 1;
+    required Form formDTO = 2;
 }
 
 //endpoint URL: GET "/getTemplates"
@@ -615,17 +603,17 @@ message InviteFriendsRequestProtobufDTO {
 
 //endpoint URL: "/searchActivities"
 message SearchActivitiesRequestProtobufDTO {
-    optional string query                       = 1;
+    optional string query = 1;
 }
 
 message SearchActivitiesResponseProtobufDTO {
-    repeated EntityContainerProtobufDTO items   = 2;
+    repeated EntityContainerProtobufDTO items = 2;
 }
 
 //endpoint URL: "/getTransactionDescription"
 // returns OK(200) or FORBIDDEN(403) in case of transaction not owned by user
 message GetTransactionDescriptionRequestProtobufDTO {
-    required string transactionId  = 1;
+    required string transactionId = 1;
 }
 
 message GetTransactionDescriptionResponseProtobufDTO {

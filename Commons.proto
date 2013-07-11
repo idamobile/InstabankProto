@@ -2,65 +2,67 @@ option java_package = "com.idamobile.instabank.dto.protobuf";
 option java_outer_classname = "Commons";
 
 enum CommentType {
-	REGULAR							= 0;
-	UNSUBSCRIBE						= 1;
+    REGULAR = 0;
+    UNSUBSCRIBE = 1;
 }
 
 enum TransactionStatus {
-	PENDING							= 0;
-	FIXED							= 1;
-	ERROR							= 2;
+    PENDING = 0;
+    FIXED = 1;
+    ERROR = 2;
 }
 
 enum TransactionType {
-	WITHDRAWAL						= 0;
-	DEPOSIT							= 1;
-	PURCHASE						= 2;
-	TRANSFER						= 3;
+    WITHDRAWAL = 0;
+    DEPOSIT = 1;
+    PURCHASE = 2;
+    TRANSFER = 3;
 }
 
 enum TransactionClass {
-        ATM_OR_TERMINAL				= 0;
-        INTERNET_BANK				= 1;
-        INTERNET_PURCHASE			= 2;
-        PHYSICAL_PURCHASE			= 3;
-        INTERNAL_TRANSFER			= 4;
-        ABS_BALANCE_CHANGE			= 5;
-        NOT_CLASSIFIED				= 6;
-        BENEFICIARY_PAYMENT			= 7;
+    ATM_OR_TERMINAL = 0;
+    INTERNET_BANK = 1;
+    INTERNET_PURCHASE = 2;
+    PHYSICAL_PURCHASE = 3;
+    INTERNAL_TRANSFER = 4;
+    ABS_BALANCE_CHANGE = 5;
+    NOT_CLASSIFIED = 6;
+    BENEFICIARY_PAYMENT = 7;
 }
 
 enum TerminalType {
-	ATM								= 0;
-	POS								= 1;
+    ATM = 0;
+    POS = 1;
 
-	/* Don't have any idea what it is. Never seen in real life */
-	CRT 							= 2;
-	Internet						= 3;
+    /* Don't have any idea what it is. Never seen in real life */
+    CRT = 2;
+    Internet = 3;
 }
 
 enum CardOrderStatus {
-	NOT_ORDERED						= 0;
-	HAS_ORDER						= 1;
-	SENT_TO_BANK					= 2;
-	EMITTED							= 3;
+    NOT_ORDERED = 0;
+    HAS_ORDER = 1;
+    SENT_TO_BANK = 2;
+    EMITTED = 3;
 }
 
 message CommentProtobufDTO {
-	required string commentId		= 1;
-	required string userId			= 2;
-	required string message			= 3;
-	required int64 timestamp		= 4;
-	required CommentType type 		= 5;
+    required string commentId = 1;
+    required string userId = 2;
+    required string message = 3;
+    required int64 timestamp = 4;
+    required CommentType type = 5;
 }
 
 message EnvelopeProtobufDTO {
-	optional string message			= 1;
-	optional string imageResourceId	= 2;
-	optional string locationId		= 3;
+    /* Length is confined to 255 symbols */
+    optional string message = 1;
+    optional string imageResourceId = 2;
+    /* Foursquare venue ID */
+    optional string locationId = 3;
 }
 
 message FieldValueProtobufDTO {
-	required string name			= 1;
-	required string value 			= 2;
+    required string name = 1;
+    required string value = 2;
 }

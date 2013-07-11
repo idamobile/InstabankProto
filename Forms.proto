@@ -30,11 +30,11 @@ message FormField {
         MULTI_LINE_TEXT = 2;
         CHECK_BOX = 3;
         PASSWORD = 4;
-	/* Date with yyyy/MM precision in GMT0
-	   min and max limits, defaultValue are in unix time format */
+        /* Date with yyyy/MM precision in GMT0
+           min and max limits, defaultValue are in unix time format */
         MONTH_YEAR = 5;
-	/* Date with yyyy/MM/hh precision in GMT0
-	   min and max limits, defaultValue are in unix time format */
+        /* Date with yyyy/MM/hh precision in GMT0
+           min and max limits, defaultValue are in unix time format */
         DATE = 6;
         COMBO_BOX = 7;
         MONEY = 8;
@@ -83,7 +83,7 @@ message BeneficiaryCategory {
 message Template {
     required string id = 1;
     required string name = 2;
-    required Form   form = 3;
+    required Form form = 3;
     required FilledForm filledForm = 4;
     required string beneficiaryId = 5;
 }

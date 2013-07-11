@@ -2,11 +2,11 @@ option java_package = "com.idamobile.instabank.dto.protobuf";
 option java_outer_classname = "Events";
 
 enum EventType {
-	ORDER_STATE_CHANGED		= 0;
-	WALLET_STATE_CHANGED	= 1;
+    ORDER_STATE_CHANGED = 0;
+    WALLET_STATE_CHANGED = 1;
 }
 
 message Event {
-	required EventType type	= 2;
-	optional string body	= 3;
+    required EventType type = 2;
+    optional string body = 3;
 }
