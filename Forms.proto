@@ -6,6 +6,12 @@ message Form {
     repeated FormField fields = 5;
     optional bool hasNext = 7;
     optional bool requiresCommission = 8;
+    required FormType type = 9;
+    enum FormType {
+        PAYMENT = 1;
+        TRANSFER = 2;
+        WITHDRAWAL = 3;
+    }
 }
 
 message FormField {
