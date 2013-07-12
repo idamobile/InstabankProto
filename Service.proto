@@ -555,7 +555,6 @@ message PerformPaymentProtobufRequestDTO {
     required FilledForm filledFormDTO = 1;
     required int64 amount = 2;
     required int64 commission = 3;
-    required string beneficiaryId = 4;
 }
 
 //endpoint URL: "/getNextPaymentForm"
