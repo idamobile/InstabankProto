@@ -620,3 +620,16 @@ message GetTransactionDescriptionResponseProtobufDTO {
     required FilledForm filledForm = 2;
     required string beneficiaryId = 3;
 }
+
+
+//endpoint URL: "/getStandardForms"
+message GetStandardFormsRequestProtobufDTO {
+    optional int32 hash = 1;
+}
+
+//empty response if there is no changes
+//filled hash & standardForms otherwise
+message GetStandardFormsResponseProtobufDTO {
+    optional int32 hash = 1;
+    repeated Form standardForms = 2;
+}
