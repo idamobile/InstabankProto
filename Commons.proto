@@ -28,6 +28,7 @@ enum TransactionClass {
     ABS_BALANCE_CHANGE = 5;
     NOT_CLASSIFIED = 6;
     BENEFICIARY_PAYMENT = 7;
+    ACCOUNT_MIGRATION = 8;
 }
 
 enum TerminalType {
