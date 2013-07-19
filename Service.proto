@@ -336,6 +336,7 @@ message GetCardInfoResponseProtobufDTO {
     required bool cardExists = 5;
     optional string predefinedDesignId = 6;
     optional string imageResourceId = 7;
+    required bool blocked = 8;
 }
 
 // endpoint URL: GET "/getBankAccountRequisites"
@@ -632,4 +633,9 @@ message GetStandardFormsRequestProtobufDTO {
 message GetStandardFormsResponseProtobufDTO {
     optional int32 hash = 1;
     repeated Form standardForms = 2;
+}
+
+//blockCard
+message BlockCardRequestProtobufDTO {
+    //todo add block reason
 }
