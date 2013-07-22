@@ -40,6 +40,8 @@ message TransactionProtobufDTO {
 
     /* Remaining balance after transaction is completed */
     optional int64 remainingBalance = 20;
+
+    optional string errorMessage = 21;
 }
 
 message MoneyRequestProtobufDTO {
