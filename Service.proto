@@ -635,7 +635,13 @@ message GetStandardFormsResponseProtobufDTO {
     repeated Form standardForms = 2;
 }
 
-//blockCard
+//endpoint URL: "/blockCard"
 message BlockCardRequestProtobufDTO {
     //todo add block reason
+}
+
+//endpoint URL: "/reIssueCard"
+// returns OK(200) or PreconditionFailed(412) if card can't be reissued (only virtual cards can be reissued now)
+message reIssueCardRequestProtobufDTO {
+    //todo add reissue reason    
 }
