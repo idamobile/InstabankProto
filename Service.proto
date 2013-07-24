@@ -327,7 +327,7 @@ message OrderCardResponseProtobufDTO {
     }
 }
 
-// endpoint URL: "/getCardInfo"
+// endpoint URL: GET "/getCardInfo"
 message GetCardInfoResponseProtobufDTO {
     required string number = 1;
     required string holderName = 2;
