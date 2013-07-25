@@ -337,6 +337,7 @@ message GetCardInfoResponseProtobufDTO {
     optional string predefinedDesignId = 6;
     optional string imageResourceId = 7;
     required bool blocked = 8;
+    required bool virtual = 9;
 }
 
 // endpoint URL: GET "/getBankAccountRequisites"
