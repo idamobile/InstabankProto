@@ -642,7 +642,8 @@ message BlockCardRequestProtobufDTO {
 }
 
 //endpoint URL: "/reIssueCard"
-// returns OK(200) or PreconditionFailed(412) if card can't be reissued (only virtual cards can be reissued now)
+// returns OK(200) or TooManyRequests(429) if card was reissued recently 
+//         or PreconditionFailed(412) if card can't be reissued (only virtual cards can be reissued now)
 message ReIssueCardRequestProtobufDTO {
     //todo add reissue reason    
 }
