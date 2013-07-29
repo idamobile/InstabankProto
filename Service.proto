@@ -550,8 +550,8 @@ message GetPaymentCommissionResponseProtobufDTO {
     required int64 amount = 1;
 }
 
-//endpoint URL: "/performBeneficiaryPayment"
-// return: void
+// endpoint URL: "/performBeneficiaryPayment"
+// returns TransactionProtobufDTO
 // 422 on wrong requisites or invalid amount
 message PerformPaymentProtobufRequestDTO {
     required FilledForm filledFormDTO = 1;
