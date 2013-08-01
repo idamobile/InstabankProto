@@ -52,6 +52,7 @@ message LoginResponseProtobufDTO {
         PIN_BANNED {LoginWithFacebookAndPinRequestProtobufDTO} if pin banned
         CODE_CHECK_FAILED {LoginWithFacebookAndPinRecoveryCodeRequestProtobufDTO} if pin recovery code check failed
         CODE_BLOCKED {LoginWithFacebookAndPinRecoveryCodeRequestProtobufDTO} if pin recovery code was blocked
+        REGISTRATION_CLOSED {RegisterWithFacebookRequestProtobufDTO} if registration is not available now
     * 400 Bad Request
         PHONE_REQUIRED {RegisterWithFacebookRequestProtobufDTO} if phone number required for registration
     */
