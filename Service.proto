@@ -648,3 +648,20 @@ message BlockCardRequestProtobufDTO {
 message ReIssueCardRequestProtobufDTO {
     //todo add reissue reason    
 }
+
+
+//endpoint URL: "/requestPhoneVerification"
+//returns OK(200) or
+//        UnprocessableEntity(422) if the phone is not valid or
+//        PreconditionFailed(412) if the phone was already attached to another user
+message VerificationCodeRequestProtobufDTO {
+    required string phoneNumber = 1; //only digits
+}
+
+//endpoint URL: "/sendVerificationCode"
+//returns OK(200) or
+//        PreconditionFailed(412) if no verification code was recently requested
+//        Unauthorized(401) in case of wrong verification code
+message SendVerificationCodeRequestProtobufDTO {
+    required string verificationCode = 1;
+}
