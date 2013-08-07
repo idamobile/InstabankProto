@@ -107,8 +107,10 @@ message EstablishPinResponseProtobufDTO {
 }
 
 // endpoint URL: "/establishPhoneNumber"
+// returns PreconditionFailed(412) if the phone number wasn't verified
 message EstablishPhoneNumberRequestProtobufDTO {
     required string phoneNumber = 1;
+    required string verificationCode = 2;
 }
 
 message EstablishPhoneNumberResponseProtobufDTO {
