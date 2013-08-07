@@ -22,6 +22,7 @@ message DiagnosticMessageProtobufDTO {
 message RegisterWithFacebookRequestProtobufDTO {
     required string accessToken = 1;
     optional string phoneNumber = 2;
+    optional string verificationCode = 3;
 }
 
 // endpoint URL: "/loginWithFacebookAndPin" -> LoginResponseProtobufDTO
@@ -55,6 +56,7 @@ message LoginResponseProtobufDTO {
         REGISTRATION_CLOSED {RegisterWithFacebookRequestProtobufDTO} if registration is not available now
     * 400 Bad Request
         PHONE_REQUIRED {RegisterWithFacebookRequestProtobufDTO} if phone number required for registration
+        PHONE_NUMBER_NOT_VERIFIED {RegisterWithFacebookRequestProtobufDTO} if phone number is not verified
     */
 
     enum Status {
