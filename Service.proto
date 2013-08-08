@@ -107,7 +107,10 @@ message EstablishPinResponseProtobufDTO {
 }
 
 // endpoint URL: "/establishPhoneNumber"
-// returns PreconditionFailed(412) if the phone number wasn't verified
+// returns PreconditionFailed(412)  if the phone number wasn't verified or
+//         UnprocessableEntity(422) if the phone is not valid or
+//         BadRequest(400)          if the verificationCode is not valid
+//         OK(200)
 message EstablishPhoneNumberRequestProtobufDTO {
     required string phoneNumber = 1;
     required string verificationCode = 2;
@@ -659,6 +662,7 @@ message ReIssueCardRequestProtobufDTO {
 //        UnprocessableEntity(422) if the phone is not valid or
 //        PreconditionFailed(412)  if the phone was already attached to another user or
 //        Unauthorized(401)        if the accessToken is not valid
+//        TooManyRequests(429)     if the verification was requested too many times
 message VerificationCodeRequestProtobufDTO {
     required string phoneNumber = 1; //only digits
     required string accessToken = 2;
