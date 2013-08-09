@@ -57,6 +57,15 @@ message LoginResponseProtobufDTO {
     * 400 Bad Request
         PHONE_REQUIRED {RegisterWithFacebookRequestProtobufDTO} if phone number required for registration
         PHONE_NUMBER_NOT_VERIFIED {RegisterWithFacebookRequestProtobufDTO} if phone number is not verified
+    * 424 Failed Dependency
+        VERIFICATION_CODE_NOT_REQUESTED if the verificationCode was not requested yet
+    * 409 Conflict
+        PHONE_UNAVAILABLE               if the phoneNumber was already attached to another user
+    * 422 Unprocessable Entity
+        WRONG_PHONE_NUMBER_FORMAT       if the phone is not valid
+        NOT_MATCHED                     if verification code is not valid
+    * 423 Locked
+        TOO_MANY_VERIFICATION_ATTEMPTS  if there were too many attempts
     */
 
     enum Status {
@@ -107,17 +116,20 @@ message EstablishPinResponseProtobufDTO {
 }
 
 // endpoint URL: "/establishPhoneNumber"
-// returns PreconditionFailed(412)  if the phone number wasn't verified or
-//         UnprocessableEntity(422) if the phone is not valid or
-//         BadRequest(400)          if the verificationCode is not valid
-//         OK(200)
+// returns:
+//      FailedDependency(424)
+//         VERIFICATION_CODE_NOT_REQUESTED if the verificationCode was not requested yet
+//      Conflict(409)
+//         PHONE_UNAVAILABLE               if the phoneNumber was already attached to another user
+//      UnprocessableEntity(422)
+//         WRONG_PHONE_NUMBER_FORMAT       if the phone is not valid
+//         NOT_MATCHED                     if verification code is not valid
+//      Locked(423)
+//         TOO_MANY_VERIFICATION_ATTEMPTS  if there were too many attempts
+//      OK(200)
 message EstablishPhoneNumberRequestProtobufDTO {
     required string phoneNumber = 1;
     required string verificationCode = 2;
-}
-
-message EstablishPhoneNumberResponseProtobufDTO {
-
 }
 
 
