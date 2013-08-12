@@ -56,7 +56,6 @@ message LoginResponseProtobufDTO {
         REGISTRATION_CLOSED {RegisterWithFacebookRequestProtobufDTO} if registration is not available now
     * 400 Bad Request
         PHONE_REQUIRED {RegisterWithFacebookRequestProtobufDTO} if phone number required for registration
-        PHONE_NUMBER_NOT_VERIFIED {RegisterWithFacebookRequestProtobufDTO} if phone number is not verified
     * 424 Failed Dependency
         VERIFICATION_CODE_NOT_REQUESTED if the verificationCode was not requested yet
     * 409 Conflict
@@ -672,7 +671,7 @@ message ReIssueCardRequestProtobufDTO {
 //endpoint URL: "/requestPhoneVerification"
 //returns OK(200) or
 //        UnprocessableEntity(422) if the phone is not valid or
-//        PreconditionFailed(412)  if the phone was already attached to another user or
+//        Conflict(409)            if the phone was already attached to another user or
 //        Unauthorized(401)        if the accessToken is not valid
 //        TooManyRequests(429)     if the verification was requested too many times
 message VerificationCodeRequestProtobufDTO {
