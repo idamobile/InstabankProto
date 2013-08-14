@@ -486,8 +486,13 @@ message WithdrawRequestProtobufDTO {
     optional string message = 2;
     /* keys:
     *  "CUSTOMER_NAME"
-    *  "BIK"
+    *  "INN"
     *  "ACCOUNT_NUMBER"
+    *  "BANK_NAME"
+    *  "BIK"
+    *  "CORRESPONDENT_ACCOUNT"
+    *  "PAYMENT_PURPOSE"
+    *  "PAYMENT_ACCOUNT" - should not be displayed on client; used as a source account for payments
     */
     repeated FieldValueProtobufDTO requisites = 3;
 }
