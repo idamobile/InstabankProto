@@ -56,6 +56,7 @@ message LoginResponseProtobufDTO {
         REGISTRATION_CLOSED {RegisterWithFacebookRequestProtobufDTO} if registration is not available now
     * 400 Bad Request
         PHONE_REQUIRED {RegisterWithFacebookRequestProtobufDTO} if phone number required for registration
+        VERIFICATION_CODE_REQUIRED {RegisterWithFacebookRequestProtobufDTO} if verification code is required for registration
     * 424 Failed Dependency
         VERIFICATION_CODE_NOT_REQUESTED if the verificationCode was not requested yet
     * 409 Conflict
