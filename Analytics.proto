@@ -1,0 +1,54 @@
+import "Entities.proto";
+
+message AnalyticsQuery {
+    enum Context {
+        // Search should be done in all transaction's human readable text fields
+        // (including comments, description, category name, venue name, system message)
+        NO_CONTEXT = 1;
+        NAME_CATEGORY = 2;
+        NAME_VENUE = 3;
+        ID_CATEGORY = 4;
+        ID_VENUE = 5;
+    }
+    required Context context = 1;
+    // ID or text to search depending on context
+    optional string value = 2;
+}
+
+// While searching:
+message AnalyticsSuggestionsRequestProtobufDTO {
+    // If not present, server should response with the most recent/popular queries
+    optional string query = 1;
+}
+
+message AnalyticsSuggestionsResponseProtobufDTO {
+    repeated AnalyticsQuery suggestions = 1;
+}
+
+// Analytics screen:
+message AnalyticsReportRequestProtobufDTO {
+    required AnalyticsQuery query = 1;
+    required int64 minTimestamp = 2;
+    // Till now if not present
+    optional int64 maxTimestamp = 3;
+}
+
+message AnalyticsReportResponseProtobufDTO {
+    required int64 spentAmount = 1;
+    required int64 incomeAmount = 2;
+    required int64 transactionsCount = 3;
+    required int64 latestTransactionTimestamp = 4;
+}
+
+message AnalyticsTransactionsRequestProtobufDTO {
+    required AnalyticsQuery query = 1;
+    required int32 pageSize = 2;
+    required int64 minTimestamp = 3;
+    required int64 maxTimestamp = 4;
+    repeated string edgeItemIds = 5;
+}
+
+message AnalyticsTransactionsResponseProtobufDTO {
+    repeated TransactionProtobufDTO transactions = 1;
+}
+
