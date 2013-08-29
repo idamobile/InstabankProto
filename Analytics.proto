@@ -16,9 +16,11 @@ message AnalyticsQuery {
     required Context context = 1;
     // ID or text to search depending on context
     optional string value = 2;
+    optional string title = 3;
 }
 
 // While searching:
+// URL: "/searchSuggestions"
 message AnalyticsSuggestionsRequestProtobufDTO {
     // If not present, server should response with the most recent/popular queries
     optional string query = 1;
