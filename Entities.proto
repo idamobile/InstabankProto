@@ -17,6 +17,7 @@ message TransactionProtobufDTO {
     repeated CommentProtobufDTO comments = 11;
 
     /* Mapped category from Foursquare */
+    /* Deprecated since we have custom categories */
     optional string categoryId = 12;
     optional TerminalType terminalType = 13;
     required TransactionType transactionType = 14;
@@ -42,6 +43,9 @@ message TransactionProtobufDTO {
     optional int64 remainingBalance = 20;
 
     optional string errorMessage = 21;
+
+    /* Custom category ID */
+    optional string transactionCategoryId = 22;
 }
 
 message MoneyRequestProtobufDTO {
@@ -59,4 +63,14 @@ message MoneyRequestProtobufDTO {
 message EntityContainerProtobufDTO {
     optional MoneyRequestProtobufDTO moneyRequest = 1;
     optional TransactionProtobufDTO transaction = 2;
+}
+
+message TransactionCategory {
+    required string categoryId = 1;
+    optional string parentId = 2;
+    optional string nameEn = 3;
+    optional string nameRu = 4;
+    repeated string foursquareCategoryIds = 5;
+    optional string iconResourceId = 6;
+    optional string wallpaperResourceId = 7;
 }

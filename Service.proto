@@ -684,3 +684,11 @@ message VerificationCodeRequestProtobufDTO {
     required string phoneNumber = 1; //only digits
     required string accessToken = 2;
 }
+
+//endpoint URL: "/getTransactionCategories"
+message GetTransactionCategoriesRequestProtobufDTO {
+}
+
+message GetTransactionCategoriesResponceProtobufDTO {
+    repeated TransactionCategory categories = 1;
+}
