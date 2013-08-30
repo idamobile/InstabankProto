@@ -15,7 +15,7 @@ message AnalyticsQuery {
     }
     required Context context = 1;
     // ID or text to search depending on context
-    optional string value = 2;
+    optional string query = 2;
     optional string title = 3;
 }
 
