@@ -70,7 +70,7 @@ message TransactionCategory {
     optional string parentId = 2;
     optional string nameEn = 3;
     optional string nameRu = 4;
-    repeated string foursquareCategoryIds = 5;
-    optional string iconResourceId = 6;
-    optional string wallpaperResourceId = 7;
+    repeated string thirdPartyCategoryIds = 5;
+    optional string iconResource = 6;
+    optional string wallpaperResource = 7;
 }
