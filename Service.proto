@@ -320,7 +320,7 @@ message OrderCardRequestProtobufDTO {
     required string firstname = 1;
     required string lastname = 2;
 
-    //without +, 10 numbers
+    //validation mask \d{11,12}
     required string phoneNumber = 3;
 
     //hh:mm:ss±hh:mm
