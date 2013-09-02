@@ -20,7 +20,7 @@ message AnalyticsQuery {
 }
 
 // While searching:
-// URL: "/searchSuggestions"
+// URL: "/getSearchSuggestions"
 message AnalyticsSuggestionsRequestProtobufDTO {
     // If not present, server should response with the most recent/popular queries
     optional string query = 1;
@@ -31,6 +31,7 @@ message AnalyticsSuggestionsResponseProtobufDTO {
 }
 
 // Analytics screen:
+// URL: "/getAnalyticsReport"
 message AnalyticsReportRequestProtobufDTO {
     required AnalyticsQuery query = 1;
     required int64 minTimestamp = 2;
@@ -45,6 +46,7 @@ message AnalyticsReportResponseProtobufDTO {
     required int64 latestTransactionTimestamp = 4;
 }
 
+// URL: "/getAnalyticsTransactions"
 message AnalyticsTransactionsRequestProtobufDTO {
     required AnalyticsQuery query = 1;
     required int32 pageSize = 2;
