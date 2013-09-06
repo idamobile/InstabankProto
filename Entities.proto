@@ -73,4 +73,5 @@ message TransactionCategory {
     repeated string thirdPartyCategoryIds = 5;
     optional string iconResource = 6;
     optional string wallpaperResource = 7;
+    optional int32 color = 8;
 }

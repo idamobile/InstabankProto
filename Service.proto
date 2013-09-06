@@ -686,6 +686,6 @@ message VerificationCodeRequestProtobufDTO {
 }
 
 //endpoint URL: "/getTransactionCategories"
-message GetTransactionCategoriesResponceProtobufDTO {
+message GetTransactionCategoriesResponseProtobufDTO {
     repeated TransactionCategory categories = 1;
 }
