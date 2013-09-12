@@ -651,13 +651,13 @@ message GetTransactionDescriptionResponseProtobufDTO {
 
 //endpoint URL: "/getStandardForms"
 message GetStandardFormsRequestProtobufDTO {
-    optional int32 hash = 1;
+    optional int32 dataHash = 1;
 }
 
 //empty response if there is no changes
-//filled hash & standardForms otherwise
+//filled dataHash & standardForms otherwise
 message GetStandardFormsResponseProtobufDTO {
-    optional int32 hash = 1;
+    optional int32 dataHash = 1;
     repeated Form standardForms = 2;
 }
 
