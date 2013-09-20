@@ -692,6 +692,6 @@ message GetTransactionCategoriesRequestProtobufDTO {
 }
 
 message GetTransactionCategoriesResponseProtobufDTO {
-    required string dataHash = 1;
-    repeated TransactionCategory categories = 2;
+    repeated TransactionCategory categories = 1;
+    optional string dataHash = 2;
 }
