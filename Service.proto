@@ -687,6 +687,11 @@ message VerificationCodeRequestProtobufDTO {
 }
 
 //endpoint URL: "/getTransactionCategories"
+message GetTransactionCategoriesRequestProtobufDTO {
+    optional string dataHash = 1;
+}
+
 message GetTransactionCategoriesResponseProtobufDTO {
-    repeated TransactionCategory categories = 1;
+    required string dataHash = 1;
+    repeated TransactionCategory categories = 2;
 }
