@@ -659,7 +659,7 @@ message GetStandardFormsRequestProtobufDTO {
 //filled dataHash & standardForms otherwise
 message GetStandardFormsResponseProtobufDTO {
     optional int32 dataHash = 1;
-    required Beneficiary standardForms = 2;
+    required BeneficiaryCategory standardForms = 2;
 }
 
 //endpoint URL: "/blockCard"
