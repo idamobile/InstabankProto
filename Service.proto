@@ -581,7 +581,7 @@ message GetPaymentCommissionResponseProtobufDTO {
 message PerformPaymentProtobufRequestDTO {
     required FilledForm filledFormDTO = 1;
     required int64 amount = 2;
-    required int64 commission = 3;
+    optional int64 commission = 3;
     optional string requestId = 4;
 }
 
