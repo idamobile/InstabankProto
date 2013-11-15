@@ -23,6 +23,7 @@ message RegisterWithFacebookRequestProtobufDTO {
     required string accessToken = 1;
     optional string phoneNumber = 2;
     optional string verificationCode = 3;
+    optional string email = 4;
 }
 
 // endpoint URL: "/loginWithFacebookAndPin" -> LoginResponseProtobufDTO
@@ -64,6 +65,7 @@ message LoginResponseProtobufDTO {
     * 422 Unprocessable Entity
         WRONG_PHONE_NUMBER_FORMAT       if the phone is not valid
         NOT_MATCHED                     if verification code is not valid
+        MALFORMED_EMAIL_ADDRESS         if email address is malformed
     * 423 Locked
         TOO_MANY_VERIFICATION_ATTEMPTS  if there were too many attempts
     */
