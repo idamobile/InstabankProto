@@ -583,7 +583,7 @@ message GetPaymentCommissionResponseProtobufDTO {
 message PerformPaymentProtobufRequestDTO {
     required FilledForm filledFormDTO = 1;
     required int64 amount = 2;
-    required int64 commission = 3;
+    optional int64 commission = 3;
     optional string requestId = 4;
 }
 
@@ -661,7 +661,7 @@ message GetStandardFormsRequestProtobufDTO {
 //filled dataHash & standardForms otherwise
 message GetStandardFormsResponseProtobufDTO {
     optional int32 dataHash = 1;
-    repeated Form standardForms = 2;
+    optional BeneficiaryCategory standardForms = 2;
 }
 
 //endpoint URL: "/blockCard"
