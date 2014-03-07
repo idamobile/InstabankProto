@@ -1,8 +1,0 @@
-option java_package = "com.idamobile.instabank.dto.protobuf";
-option java_outer_classname = "CardStore";
-
-message CardDesignProtobufDTO {
-    required string cardDesignId = 1;
-    required string name = 2;
-    required string imageResourceId = 3;
-}

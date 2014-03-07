@@ -8,7 +8,6 @@ import "Events.proto";
 import "Wallets.proto";
 import "Social.proto";
 import "Notifications.proto";
-import "CardStore.proto";
 import "Locations.proto";
 import "Forms.proto";
 
@@ -306,15 +305,6 @@ message GetNotificationsTimelineRequestProtobufDTO {
 message GetNotificationsTimelineResponseProtobufDTO {
     repeated TimelineNotification notifications = 1;
     optional int64 lastNotificationCreationTime = 2; //date of the last notification, null if user have 0 notifications at all
-}
-
-// endpoint URL: "/getCardDesigns"
-message GetCardDesignsRequestProtobufDTO {
-
-}
-
-message GetCardDesignsResponseProtobufDTO {
-    repeated CardDesignProtobufDTO cards = 1;
 }
 
 // endpoint URL: "/orderCard"
@@ -697,3 +687,50 @@ message GetTransactionCategoriesResponseProtobufDTO {
     repeated TransactionCategory categories = 1;
     optional string dataHash = 2;
 }
+
+// Card Limits 
+
+//endpoint URL: GET "/getVirtualCardLimit"
+message GetVirtualCardLimitResponseDTO {
+    required int64 limit    = 1;
+
+    /*
+    HTTP Error Codes:
+    412 Precondition Failed - user doesn't have a virtual card
+    500 Internal Server error - if limit was negative or not set bacause of Pasha - mudak
+    */
+
+}
+
+//endpoint URL: "/setPlasticCardLimits"
+// returns HTTP codes:
+// 200 - OK
+// 412 - user doesn't have plastic
+// 422 - invalid limit amount
+message SetPlasticCardLimitsRequestDTO {
+    optional int64 withdrawalDailyLimit = 1;
+    optional int64 withdrawalMonhtlyLimit = 2;
+
+    optional int64 internetTransferDailyLimit = 3;
+    optional int64 internetTransferMonthlyLimit = 4;
+
+    optional int64 posPurchaseDailyLimit = 5;
+    optional int64 posPurchaseMonthlyLimit = 5;
+}
+
+//endpoint URL: "/getPlasticCardLimits"
+// returns HTTP codes:
+// 412 - user doesn't have plastic
+message GetPlasticCardLimitsResponseDTO {
+    required int64 withdrawalDailyLimit = 1;
+    required int64 withdrawalMonhtlyLimit = 2;
+
+    required int64 internetTransferDailyLimit = 3;
+    required int64 internetTransferMonthlyLimit = 4;
+
+    required int64 posPurchaseDailyLimit = 5;
+    required int64 posPurchaseMonthlyLimit = 5;
+    // if user didn't set some limits default values are returned
+}
+
+
