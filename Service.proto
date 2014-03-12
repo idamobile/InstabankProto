@@ -76,8 +76,9 @@ message LoginResponseProtobufDTO {
     required Status status = 1;
     optional string sessionId = 2;
     optional string userId = 3;
-    required CardOrderStatus cardOrderStatus = 4;
-    optional bool newOfferContractExists = 5;
+    required CardOrderStatus cardOrderStatus    = 4;
+    optional bool newOfferContractExists        = 5;
+    optional int64 debtAmount                   = 6;    
 }
 
 //** LOGIN END **//
