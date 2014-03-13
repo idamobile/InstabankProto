@@ -78,7 +78,6 @@ message LoginResponseProtobufDTO {
     optional string userId = 3;
     required CardOrderStatus cardOrderStatus    = 4;
     optional bool newOfferContractExists        = 5;
-    optional int64 debtAmount                   = 6;    
 }
 
 //** LOGIN END **//
@@ -107,6 +106,7 @@ message GetOptionsStatusesResponseProtobufDTO {
     optional string socialConfidantFacebookId = 3;
     optional bool phoneNumberEstablished = 4;
     optional string phoneNumber = 5;
+    optional int64 debtAmount   = 6;
 }
 
 //endpoint URL: "/establishPin"
