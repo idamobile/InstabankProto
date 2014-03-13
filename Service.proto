@@ -705,18 +705,17 @@ message GetVirtualCardLimitResponseProtobufDTO {
 
 //endpoint URL: "/setPlasticCardLimits"
 // returns HTTP codes:
-// 200 - OK
+// 204 - OK
 // 412 - user doesn't have plastic
 // 422 - invalid limit amount
 message SetPlasticCardLimitsRequestProtobufDTO {
     optional int64 withdrawalDailyLimit = 1;
     optional int64 withdrawalMonthlyLimit = 2;
 
-    optional int64 internetTransferDailyLimit = 3;
-    optional int64 internetTransferMonthlyLimit = 4;
+    optional int64 spendingDailyLimit = 3;
+    optional int64 spendingMonthlyLimit = 4;
 
-    optional int64 posPurchaseDailyLimit = 5;
-    optional int64 posPurchaseMonthlyLimit = 6;
+    optional bool lockOperations = 5;
 }
 
 //endpoint URL: "/getPlasticCardLimits"
@@ -726,12 +725,10 @@ message GetPlasticCardLimitsResponseProtobufDTO {
     required int64 withdrawalDailyLimit = 1;
     required int64 withdrawalMonthlyLimit = 2;
 
-    required int64 internetTransferDailyLimit = 3;
-    required int64 internetTransferMonthlyLimit = 4;
+    required int64 spendingDailyLimit = 3;
+    required int64 spendingMonthlyLimit = 4;
 
-    required int64 posPurchaseDailyLimit = 5;
-    required int64 posPurchaseMonthlyLimit = 6;
-    // if user didn't set some limits default values are returned
+    required bool lockOperations = 5;
 }
 
 
