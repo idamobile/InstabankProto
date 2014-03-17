@@ -693,7 +693,7 @@ message GetTransactionCategoriesResponseProtobufDTO {
 
 //endpoint URL: GET "/getVirtualCardLimit"
 message GetVirtualCardLimitResponseProtobufDTO {
-    required int64 limit    = 1;
+    required LimitPairDTO limit     = 1;
 
     /*
     HTTP Error Codes:
@@ -722,11 +722,12 @@ message SetPlasticCardLimitsRequestProtobufDTO {
 // returns HTTP codes:
 // 412 - user doesn't have plastic
 message GetPlasticCardLimitsResponseProtobufDTO {
-    required int64 withdrawalDailyLimit = 1;
-    required int64 withdrawalMonthlyLimit = 2;
 
-    required int64 spendingDailyLimit = 3;
-    required int64 spendingMonthlyLimit = 4;
+    required LimitPairDTO withdrawalDailyLimit = 1;
+    required LimitPairDTO withdrawalMonthlyLimit = 2;
+
+    required LimitPairDTO spendingDailyLimit = 3;
+    required LimitPairDTO spendingMonthlyLimit = 4;
 
     required bool lockOperations = 5;
 }

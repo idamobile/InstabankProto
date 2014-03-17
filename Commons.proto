@@ -67,3 +67,8 @@ message FieldValueProtobufDTO {
     required string name = 1;
     required string value = 2;
 }
+
+message LimitPairDTO {
+    required int64 limit            = 1;
+    required int64 currentValue     = 2;
+}
