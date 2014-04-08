@@ -732,4 +732,26 @@ message GetPlasticCardLimitsResponseProtobufDTO {
     required bool lockOperations = 5;
 }
 
+//endpoint URL: GET "/getRefillTrackerStatus"
+message GetRefillTrackerStatusResponseProtobufDTO {
+    required int32 currentMonth = 1;
+    required int32 currentYear = 2;
+
+    /*
+     * In case of VC contains number of overall transfers.
+     * In case of Plastic contains number of transfers during current month.
+     */
+    required int32 completedTransfersCount = 3;
+
+    /*
+     * Number of free transfers left
+     */
+    required int32 remainingFreeTransfersCount = 4;
+
+    /*
+     * Count of free transfers according to conditions
+     */    
+    required int32 maxFreeTransfersCount = 5;
+}
+
 
