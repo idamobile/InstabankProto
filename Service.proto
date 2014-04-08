@@ -15,7 +15,7 @@ message DiagnosticMessageProtobufDTO {
     required string info = 1;
 }
 
-//** LOGIN **//
+//** LOGIN **
 
 // endpoint URL: "/registerWithFacebook"
 message RegisterWithFacebookRequestProtobufDTO {
@@ -80,7 +80,7 @@ message LoginResponseProtobufDTO {
     optional bool newOfferContractExists        = 5;
 }
 
-//** LOGIN END **//
+//** LOGIN END **
 
 
 //endpoint URL: "/getRemainingPinAttempts"
