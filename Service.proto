@@ -756,11 +756,11 @@ message GetRefillTrackerStatusResponseProtobufDTO {
 
 //endpoint URL: GET "/getRefillCommission"
 message GetRefillCommissionRequestProtobufDTO {
-    required int32 amount = 1;
+    required int64 amount = 1;
 }
 
 message GetRefillCommissionResponseProtobufDTO {
-    required int32 commissionAmount = 1;
+    required int64 commissionAmount = 1;
 }
 
 
