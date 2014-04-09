@@ -763,4 +763,14 @@ message GetRefillCommissionResponseProtobufDTO {
     required int64 commissionAmount = 1;
 }
 
+//endpoint URL: GET "/getTextResource"
+message GetTextResourceRequestProtobufDTO {
+    required string resourceId = 1;
+}
+
+message GetTextResourceResponseProtobufDTO {
+    optional string text = 1;
+}
+
+
 
