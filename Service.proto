@@ -754,4 +754,13 @@ message GetRefillTrackerStatusResponseProtobufDTO {
     required int32 maxFreeTransfersCount = 5;
 }
 
+//endpoint URL: GET "/getRefillCommission"
+message GetRefillCommissionRequestProtobufDTO {
+    required int32 amount = 1;
+}
+
+message GetRefillCommissionResponseProtobufDTO {
+    required int32 commissionAmount = 1;
+}
+
 
