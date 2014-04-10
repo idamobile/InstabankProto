@@ -765,11 +765,11 @@ message GetRefillCommissionResponseProtobufDTO {
 
 //endpoint URL: GET "/getTextResource"
 message GetTextResourceRequestProtobufDTO {
-    required string resourceId = 1;
+    repeated string resourceId = 1;
 }
 
 message GetTextResourceResponseProtobufDTO {
-    optional string text = 1;
+    repeated FieldValueProtobufDTO resources = 1;
 }
 
 
