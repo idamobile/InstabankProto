@@ -395,6 +395,12 @@ message DescribeEntityRequestProtobufDTO {
     required EnvelopeProtobufDTO envelope = 1;
     // moneyRequest ID or transaction ID
     required string entityId = 2;
+
+    /* 
+        Custom category ID, used only for external transactions. 
+        Otherwise ignored.
+    */
+    optional string transactionCategoryId = 3;
 }
 
 //
