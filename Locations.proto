@@ -10,10 +10,17 @@ message LocationServiceProtobufDTO {
     optional string description = 4;
 }
 
+// Deprecated
 message LocationTypeProtobufDTO {
     required string locationTypeId = 1;
     repeated string attributeKeys = 2;
     required string kind = 3;
+}
+
+message LocationOwnerProtobufDTO {
+    required string ownerId = 1;
+    required string iconURL = 2;
+    required string name = 3;
 }
 
 message LocationProtobufDTO {
