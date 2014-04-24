@@ -565,7 +565,7 @@ message LocationsV2ResponseProtobufDTO {
     required int64 lastUpdateTime = 5;
 }
 
-// endpoint URL: /v2/getLocationsDictionary
+// endpoint URL: GET /v2/getLocationsDictionary
 message LocationsV2DictionaryResponseProtobufDTO {
     repeated LocationServiceProtobufDTO services = 1;
     repeated LocationOwnerProtobufDTO owners = 2;
