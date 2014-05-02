@@ -8,6 +8,7 @@ message LocationServiceProtobufDTO {
     required string name = 2;
     optional string parentId = 3;
     optional string description = 4;
+    optional int32 order = 5;
 }
 
 // Deprecated
