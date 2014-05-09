@@ -792,6 +792,11 @@ message GetRefillCommissionResponseProtobufDTO {
     required int64 commissionAmount = 1;
 }
 
+//endpoint URL: GET "/getC2CTextResources"
+message GetC2CTextResourcesProtobufResponseDTO {
+    optional string limitsText = 1;
+}
+
 //endpoint URL: GET "/getTextResource"
 message GetTextResourceRequestProtobufDTO {
     repeated string resourceId = 1;
