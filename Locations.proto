@@ -43,3 +43,10 @@ message LocationProtobufDTO {
     // ownerId from LocationOwnerProtobufDTO
     optional string ownerId = 11;
 }
+
+message ClusterProtobufDTO {
+    required string clusterId = 1;
+    required double latitude = 2;
+    required double longitude = 3;
+    required int32 size = 4; 
+}

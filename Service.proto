@@ -571,6 +571,21 @@ message LocationsV2DictionaryResponseProtobufDTO {
     repeated LocationOwnerProtobufDTO owners = 2;
 }
 
+// endpoint URL: GET /v2/getLocationsViewport
+message LocationsViewportRequestProtobufDTO { 
+    required double centerLatitude = 1;
+    required double centerLongitude = 2;
+    required double latitudeSpan = 3;
+    required double longitudeSpan = 4;
+    required int32 zoomLevel = 5;
+    repeated string serviceIds = 6;
+}
+
+message LocationsViewportResponseProtobufDTO {
+    repeated LocationProtobufDTO locations = 1;
+    repeated ClusterProtobufDTO clusters = 2;
+}
+
 //endpoint URL: agreeWithOfferContract
 message AgreeWithOfferContractRequestProtobufDTO {
 
