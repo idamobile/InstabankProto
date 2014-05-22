@@ -571,7 +571,7 @@ message LocationsV2DictionaryResponseProtobufDTO {
     repeated LocationOwnerProtobufDTO owners = 2;
 }
 
-// endpoint URL: GET /v2/getLocationsViewport
+// endpoint URL: POST /v2/getLocationsViewport
 message LocationsViewportRequestProtobufDTO { 
     required double centerLatitude = 1;
     required double centerLongitude = 2;
@@ -584,6 +584,17 @@ message LocationsViewportRequestProtobufDTO {
 message LocationsViewportResponseProtobufDTO {
     repeated LocationProtobufDTO locations = 1;
     repeated ClusterProtobufDTO clusters = 2;
+}
+
+// endpoint URL: POST /v2/getNearestLocation 
+message NearestLocationRequestProtobufDTO {
+    required double latitude = 1;
+    required double longitude = 2;
+    repeated string serviceIds = 3;
+}
+
+message NearestLocationResponseProtobufDTO {
+    optional LocationProtobufDTO location = 1;
 }
 
 //endpoint URL: agreeWithOfferContract
