@@ -21,7 +21,8 @@ message LocationTypeProtobufDTO {
 message LocationOwnerProtobufDTO {
     required string ownerId = 1;
     required string iconURL = 2;
-    required string name = 3;
+    required string pinIconURL = 3;
+    required string name = 4;
 }
 
 message LocationProtobufDTO {
