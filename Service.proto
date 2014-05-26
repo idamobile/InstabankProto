@@ -819,8 +819,16 @@ message GetRefillCommissionResponseProtobufDTO {
 }
 
 //endpoint URL: GET "/getC2CTextResources"
+// Accept-Language header param should be set
 message GetC2CTextResourcesProtobufResponseDTO {
     optional string limitsText = 1;
+}
+
+//endpoint URL: GET "/getC2CLimits"
+// Accept-Language header param should be set
+message GetC2CLimitsProtobufResponseDTO {
+    required int64 allowedAmount = 1;
+    repeated string possibleErrorMessages = 2;
 }
 
 //endpoint URL: GET "/getTextResource"
