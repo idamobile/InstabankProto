@@ -716,12 +716,31 @@ message BlockCardRequestProtobufDTO {
 }
 
 //endpoint URL: "/reIssueCard"
-// returns OK(200) or TooManyRequests(429) if card was reissued recently 
-//         or PreconditionFailed(412) if card can't be reissued (only virtual cards can be reissued now)
+//returns:
+//    NO_CONTENT(204)
+//    PreconditionFailed(412) if not enouth balance for commission or reissue in progress
 message ReIssueCardRequestProtobufDTO {
-    //todo add reissue reason    
+    // fast reissue. More expensive
+    // not used for virtual cards
+    optional bool express = 1;
 }
 
+//endpoint URL: "/reIssueCardInfo"
+// inqures commission fee & last reissue date & status of current reissuing process
+message ReIssueCardInfoRequestProtobufDTO {
+    required bool express = 1;
+}
+
+message ReIssueCardInfoResponseProtobufDTO {
+    enum Status {
+        IN_PROGRESS = 0;
+        LAST_REQUEST_FAILED = 1;
+        COMPLETED = 2;
+    }
+    required int64 reissueFee = 1;
+    optional int64 lastReissieDate = 2;
+    optional Status lastReissueStatus = 3;
+}
 
 //endpoint URL: "/requestPhoneVerification"
 //returns OK(200) or
