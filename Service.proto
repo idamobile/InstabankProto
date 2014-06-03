@@ -719,6 +719,7 @@ message BlockCardRequestProtobufDTO {
 //returns:
 //    NO_CONTENT(204)
 //    PreconditionFailed(412) if not enouth balance for commission or reissue in progress
+//    TooManyRequests(429)
 message ReIssueCardRequestProtobufDTO {
     // fast reissue. More expensive
     // not used for virtual cards
