@@ -734,12 +734,12 @@ message ReIssueCardInfoRequestProtobufDTO {
 
 message ReIssueCardInfoResponseProtobufDTO {
     enum Status {
-        IN_PROGRESS = 0;
-        LAST_REQUEST_FAILED = 1;
+        ORDER_SENT = 0;
+        SENDING_FAILED = 1;
         COMPLETED = 2;
     }
     required int64 reissueFee = 1;
-    optional int64 lastReissieDate = 2;
+    optional int64 lastReissueDate = 2;
     optional Status lastReissueStatus = 3;
 }
 
