@@ -732,6 +732,7 @@ message ReIssueCardInfoRequestProtobufDTO {
     required bool express = 1;
 }
 
+// or 412 PreconditionFailed - invalid account type: plastic card required
 message ReIssueCardInfoResponseProtobufDTO {
     enum Status {
         ORDER_SENT = 0;
