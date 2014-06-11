@@ -342,6 +342,12 @@ message OrderCardResponseProtobufDTO {
 
 // endpoint URL: GET "/getCardInfo"
 message GetCardInfoResponseProtobufDTO {
+
+    enum BlockReason {
+        BLOCKED_BY_BANK = 1;
+        REISSUE_IN_PROGRESS = 2;
+    }
+
     required string number = 1;
     required string holderName = 2;
     required string validThru = 3;
@@ -351,6 +357,7 @@ message GetCardInfoResponseProtobufDTO {
     optional string imageResourceId = 7;
     required bool blocked = 8;
     required bool virtual = 9;
+    optional BlockReason blockReason = 10;
 }
 
 // endpoint URL: GET "/getBankAccountRequisites"
