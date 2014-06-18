@@ -12,7 +12,16 @@ enum AccountStatus {
     NOT_ACTIVE = 2;
 }
 
+enum Gender {
+   MALE = 1;
+   FEMALE = 2;
+   RESERVED = 3;
+}
+
 message InstabankAccountDTO {
     required string instaUserId = 1;
     required AccountStatus status = 2;
+    optional Gender gender = 3;
+    optional String firstName = 4;
+    optional String lastName = 5;
 }
