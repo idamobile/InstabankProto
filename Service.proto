@@ -62,14 +62,14 @@ message LoginWithUserTokenAndPinRequestProtobufDTO {
 // endpoint URL: "/loginWithFacebookAndPin" -> LoginResponseProtobufDTO
 // endpoint URL: "/loginWithFacebookAndPinAttempts" -> LoginWithPinAttemptsResponseProtobufDTO
 message LoginWithFacebookAndPinRequestProtobufDTO {
-    required string accessToken = 1;
+    required string fbAccessToken = 1;
     required int32 pin = 2;
 }
 
 // endpoint URL: "/loginWithFacebookAndPinRecoveryCode"
 // returns LoginResponseProtobufDTO
 message LoginWithFacebookAndPinRecoveryCodeRequestProtobufDTO {
-    required string accessToken = 1;
+    required string fbAccessToken = 1;
     required string pinRecoveryCode = 2;
 }
 
@@ -202,7 +202,7 @@ message EstablishEmailRequestProtobufDTO {
 
 // endpoint URL: "/sendPinRecoveryCode"
 message SendPinRecoveryCodeRequestProtobufDTO {
-    required string accessToken = 1;
+    required string fbAccessToken = 1;
 }
 
 message SendPinRecoveryCodeResponseProtobufDTO {
