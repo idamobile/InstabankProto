@@ -3,7 +3,8 @@ option java_outer_classname = "Social";
 
 message InstaSocialIdsMappingDTO {
     required InstabankAccountDTO instaUser = 1;
-    required string facebookId = 2;
+    optional string facebookId = 2;
+    optional string phone = 3;
 }
 
 enum AccountStatus {
@@ -22,6 +23,6 @@ message InstabankAccountDTO {
     required string instaUserId = 1;
     required AccountStatus status = 2;
     optional Gender gender = 3;
-    optional String firstName = 4;
-    optional String lastName = 5;
+    optional string firstName = 4;
+    optional string lastName = 5;
 }
