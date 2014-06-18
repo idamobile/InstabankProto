@@ -144,6 +144,7 @@ message GetOptionsStatusesResponseProtobufDTO {
     optional string phoneNumber = 5;
     optional int64 debtAmount   = 6;
     optional bool securityWordEstablished   = 7;
+    optional string email = 8;
 }
 
 //endpoint URL: "/establishPin"
