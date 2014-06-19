@@ -47,6 +47,8 @@ message UserTokenResponseProtobufDTO {
         IS_NOT_REGISTERED
     * 422 Unprocessable Entity
         NOT_MATCHED                     if verification code is not valid
+    * 423 Locked
+        TOO_MANY_VERIFICATION_ATTEMPTS  if there were too many attempts
     * 424 Failed Dependency
         VERIFICATION_CODE_NOT_REQUESTED if the verificationCode was not requested yet    
     */
