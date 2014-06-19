@@ -194,7 +194,7 @@ message EstablishSocialConfidantResponseProtobufDTO {
 // returns:
 //      UnprocessableEntity(422)
 //         WRONG_WORD_FORMAT       if the word contains derecated symbols (' ','\t','\n','\r')
-//         WORD_IS_TO_SHORT        if the word length is lower than 6 symbols 
+//         WORD_IS_TO_SHORT;%d     if the word length is lower than %d symbols 
 //      OK(200)
 message EstablishSecurityWordRequestProtobufDTO {
     required string securityWord = 1;
