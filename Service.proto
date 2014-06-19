@@ -25,6 +25,13 @@ message RegisterWithFacebookRequestProtobufDTO {
     optional string email = 4;
 }
 
+// should be called if PIN not set
+// endpoint URL: "/loginWithUserToken"
+// returns LoginResponseProtobufDTO
+message LoginWithUserTokenRequestProtobufDTO {
+    required string userToken = 1;
+}
+
 // endpoint URL: "/registerWithPhone"
 message RegisterWithPhoneRequestProtobufDTO {
     required string phoneNumber = 1;
