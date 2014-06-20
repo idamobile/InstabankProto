@@ -42,6 +42,24 @@ message RegisterWithPhoneRequestProtobufDTO {
     required Gender gender = 6;  
 }
 
+// endpoint URL: "/getRecoveryOptions"
+// returns GetRecoveryOptionsRequestProtobufDTO
+message GetRecoveryOptionsRequestProtobufDTO {
+    optional string fbAccessToken = 1;
+    optional string userToken = 2;
+}
+
+message GetRecoveryOptionsResponseProtobufDTO {
+/*
+    * 422 Unprocessable Entity 
+            IS_NOT_REGISTERED if this user is not registered in system
+            FACEBOOK_INVALID_CREDENTIALS if incorrect facebook token
+            TOKENS_FROM_DIFFERENT_USERS if tokens from different users           
+*/
+    required bool socialConfidentEstablished = 1;
+    required bool securityWordEstablished = 2;
+}
+
 // endpoint URL: "/requestUserToken"
 // returns UserTokenResponseProtobufDTO
 message UserTokenRequestProtobufDTO {
