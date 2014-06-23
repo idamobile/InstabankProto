@@ -78,6 +78,7 @@ message UserTokenResponseProtobufDTO {
         VERIFICATION_CODE_NOT_REQUESTED if the verificationCode was not requested yet    
     */
     required string userToken = 1;
+    required InstabankAccountDTO account = 2;
 }
 
 // endpoint URL: "/loginWithUserTokenAndPin" -> LoginResponseProtobufDTO
