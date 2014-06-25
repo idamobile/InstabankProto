@@ -19,85 +19,23 @@ message DiagnosticMessageProtobufDTO {
 
 // endpoint URL: "/registerWithFacebook"
 message RegisterWithFacebookRequestProtobufDTO {
-    required string fbAccessToken = 1;
+    required string accessToken = 1;
     optional string phoneNumber = 2;
     optional string verificationCode = 3;
     optional string email = 4;
 }
 
-// should be called if PIN not set
-// endpoint URL: "/loginWithUserToken"
-// returns LoginResponseProtobufDTO
-message LoginWithUserTokenRequestProtobufDTO {
-    required string userToken = 1;
-}
-
-// endpoint URL: "/registerWithPhone"
-message RegisterWithPhoneRequestProtobufDTO {
-    required string phoneNumber = 1;
-    required string verificationCode = 2;
-    required string email = 3;
-    required string firstName = 4;
-    required string lastName = 5;  
-    required Gender gender = 6;  
-}
-
-// endpoint URL: "/getRecoveryOptions"
-// returns GetRecoveryOptionsRequestProtobufDTO
-message GetRecoveryOptionsRequestProtobufDTO {
-    optional string fbAccessToken = 1;
-    optional string userToken = 2;
-}
-
-message GetRecoveryOptionsResponseProtobufDTO {
-/*
-    * 422 Unprocessable Entity 
-            IS_NOT_REGISTERED if this user is not registered in system
-            FACEBOOK_INVALID_CREDENTIALS if incorrect facebook token
-            TOKENS_FROM_DIFFERENT_USERS if tokens from different users           
-*/
-    required bool socialConfidentEstablished = 1;
-    required bool securityWordEstablished = 2;
-}
-
-// endpoint URL: "/requestUserToken"
-// returns UserTokenResponseProtobufDTO
-message UserTokenRequestProtobufDTO {
-    required string phoneNumber = 1;
-    required string verificationCode = 2;
-}
-
-message UserTokenResponseProtobufDTO {
-   /* 401 Unauthorized
-        IS_NOT_REGISTERED
-    * 422 Unprocessable Entity
-        NOT_MATCHED                     if verification code is not valid
-    * 423 Locked
-        TOO_MANY_VERIFICATION_ATTEMPTS  if there were too many attempts
-    * 424 Failed Dependency
-        VERIFICATION_CODE_NOT_REQUESTED if the verificationCode was not requested yet    
-    */
-    required string userToken = 1;
-    required InstabankAccountDTO account = 2;
-}
-
-// endpoint URL: "/loginWithUserTokenAndPin" -> LoginResponseProtobufDTO
-message LoginWithUserTokenAndPinRequestProtobufDTO {
-    required string userToken = 1;
-    required int32 pin = 2;
-}
-
 // endpoint URL: "/loginWithFacebookAndPin" -> LoginResponseProtobufDTO
 // endpoint URL: "/loginWithFacebookAndPinAttempts" -> LoginWithPinAttemptsResponseProtobufDTO
 message LoginWithFacebookAndPinRequestProtobufDTO {
-    required string fbAccessToken = 1;
+    required string accessToken = 1;
     required int32 pin = 2;
 }
 
 // endpoint URL: "/loginWithFacebookAndPinRecoveryCode"
 // returns LoginResponseProtobufDTO
 message LoginWithFacebookAndPinRecoveryCodeRequestProtobufDTO {
-    required string fbAccessToken = 1;
+    required string accessToken = 1;
     required string pinRecoveryCode = 2;
 }
 
@@ -140,7 +78,6 @@ message LoginResponseProtobufDTO {
     optional string userId = 3;
     required CardOrderStatus cardOrderStatus    = 4;
     optional bool newOfferContractExists        = 5;
-    optional string userToken = 6;
 }
 
 //** LOGIN END **
@@ -148,8 +85,7 @@ message LoginResponseProtobufDTO {
 
 //endpoint URL: "/getRemainingPinAttempts"
 message GetRemainingPinAttemptsRequestProtobufDTO {
-    optional string fbAccessToken = 1;
-    optional string userToken = 2;
+    required string accessToken = 1;
 }
 
 message GetRemainingPinAttemptsResponseProtobufDTO {
@@ -171,8 +107,6 @@ message GetOptionsStatusesResponseProtobufDTO {
     optional bool phoneNumberEstablished = 4;
     optional string phoneNumber = 5;
     optional int64 debtAmount   = 6;
-    optional bool securityWordEstablished   = 7;
-    optional string email = 8;
 }
 
 //endpoint URL: "/establishPin"
@@ -200,6 +134,7 @@ message EstablishPhoneNumberRequestProtobufDTO {
     required string verificationCode = 2;
 }
 
+
 //endpoint URL: "/establishSocialConfidant"
 message EstablishSocialConfidantRequestProtobufDTO {
     required string facebookId = 1;
@@ -209,28 +144,9 @@ message EstablishSocialConfidantResponseProtobufDTO {
 
 }
 
-// endpoint URL: "/establishSecurityWord"
-// returns:
-//      UnprocessableEntity(422)
-//         WRONG_WORD_FORMAT       if the word contains derecated symbols (' ','\t','\n','\r')
-//         WORD_IS_TO_SHORT;%d     if the word length is lower than %d symbols 
-//      OK(200)
-message EstablishSecurityWordRequestProtobufDTO {
-    required string securityWord = 1;
-}
-
-// endpoint URL: "/establishEmail"
-// returns:
-//      UnprocessableEntity(422)
-//         MALFORMED_EMAIL_ADDRESS 
-//      OK(200)
-message EstablishEmailRequestProtobufDTO {
-    required string email = 1;
-}
-
 // endpoint URL: "/sendPinRecoveryCode"
 message SendPinRecoveryCodeRequestProtobufDTO {
-    required string fbAccessToken = 1;
+    required string accessToken = 1;
 }
 
 message SendPinRecoveryCodeResponseProtobufDTO {
@@ -301,7 +217,6 @@ message GetSocialNetworkIdsResponseProtobufDTO {
 // deprecated endpoint URL: "/getInstabankUserIds"
 message GetInstabankIdsRequestProtobufDTO {
     repeated string facebookIds = 1;
-    repeated string phones = 2;
 }
 
 message GetInstabankIdsResponseProtobufDTO {
@@ -466,7 +381,7 @@ message CreateRequestMoneyRequestProtobufDTO {
     repeated string participantIds = 3;
     // List of Facebook IDs of non-existent users
     repeated string invitedParticipants = 4;
-    optional string fbAccessToken = 5;
+    optional string accessToken = 5;
 }
 
 
@@ -477,7 +392,7 @@ message CreateTransferMoneyRequestProtobufDTO {
     required int64 amount = 2;
     required string recipientId = 3;
     required bool existingUser = 4;
-    optional string fbAccessToken = 5;
+    optional string accessToken = 5;
     optional string requestId = 6;
 }
 
@@ -839,13 +754,12 @@ message ReIssueCardInfoResponseProtobufDTO {
 //endpoint URL: "/requestPhoneVerification"
 //returns OK(200) or
 //        UnprocessableEntity(422) if the phone is not valid or
-//        Conflict(409)            if the phone was already attached to another user or (checked only if one of the tokens presents)
-//        Unauthorized(401)        if the fbAccessToken or userToken is not valid
+//        Conflict(409)            if the phone was already attached to another user or
+//        Unauthorized(401)        if the accessToken is not valid
 //        TooManyRequests(429)     if the verification was requested too many times
 message VerificationCodeRequestProtobufDTO {
     required string phoneNumber = 1; //only digits
-    optional string fbAccessToken = 2;
-    optional string userToken = 3;
+    required string accessToken = 2;
 }
 
 //endpoint URL: "/getTransactionCategories"
