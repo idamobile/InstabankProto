@@ -845,7 +845,6 @@ message ReIssueCardInfoResponseProtobufDTO {
 message VerificationCodeRequestProtobufDTO {
     required string phoneNumber = 1; //only digits
     optional string fbAccessToken = 2;
-    optional string userToken = 3;
 }
 
 //endpoint URL: "/getTransactionCategories"
