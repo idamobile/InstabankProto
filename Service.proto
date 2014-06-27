@@ -62,7 +62,7 @@ message GetRecoveryOptionsResponseProtobufDTO {
 }
 
 // endpoint URL: "/connectFacebook"
-// returns HTTP 200 if connection successful
+// returns GetFacebookTokenResponseProtobufDTO if connection successful server returns long-lived token
 //         HTTP 422
 //            FB_CONNECTED_TO_ANOTHER_INSTA_USER if this fb connected to another user in Instabank
 //            FACEBOOK_INVALID_CREDENTIALS if incorrect facebook token
@@ -78,13 +78,13 @@ message ConnectOrUpdateFacebookTokenRequestProtobufDTO {
 message DisconnectFacebookRequestProtobufDTO {
 }
 
+// should return long-lived token
 // endpoint GET URL: "/getFacebookToken"
 // returns HTTP 412 if no access token connected
 message GetFacebookTokenResponseProtobufDTO {
     required string fbAccessToken = 1;
     required int64 expires = 2;
     repeated string permissions = 3;
-    required bool longLivedToked = 4;
 }
 
 // endpoint URL: "/requestUserToken"
