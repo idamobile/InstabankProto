@@ -18,6 +18,7 @@ message DiagnosticMessageProtobufDTO {
 //** LOGIN **
 
 // endpoint URL: "/registerWithFacebook"
+//DEPRECATED
 message RegisterWithFacebookRequestProtobufDTO {
     required string fbAccessToken = 1;
     optional string phoneNumber = 2;
@@ -45,7 +46,7 @@ message RegisterWithPhoneRequestProtobufDTO {
 // endpoint URL: "/getRecoveryOptions"
 // returns GetRecoveryOptionsRequestProtobufDTO
 message GetRecoveryOptionsRequestProtobufDTO {
-    optional string fbAccessToken = 1;
+    optional string fbAccessToken = 1 [deprecated=true];
     optional string userToken = 2;
 }
 
@@ -60,6 +61,32 @@ message GetRecoveryOptionsResponseProtobufDTO {
     required bool securityWordEstablished = 2;
 }
 
+// endpoint URL: "/connectFacebook"
+// returns HTTP 200 if connection successful
+//         HTTP 422
+//            FB_CONNECTED_TO_ANOTHER_INSTA_USER if this fb connected to another user in Instabank
+//            FACEBOOK_INVALID_CREDENTIALS if incorrect facebook token
+message ConnectOrUpdateFacebookTokenRequestProtobufDTO {
+    required string fbAccessToken = 1;
+    required int64 expires = 2;
+    repeated string permissions = 3;
+    required bool longLivedToked = 4;
+}
+
+// endpoint URL: "/disconnectFacebook"
+// returns HTTP 200
+message DisconnectFacebookRequestProtobufDTO {
+}
+
+// endpoint GET URL: "/getFacebookToken"
+// returns HTTP 412 if no access token connected
+message GetFacebookTokenResponseProtobufDTO {
+    required string fbAccessToken = 1;
+    required int64 expires = 2;
+    repeated string permissions = 3;
+    required bool longLivedToked = 4;
+}
+
 // endpoint URL: "/requestUserToken"
 // returns UserTokenResponseProtobufDTO
 message UserTokenRequestProtobufDTO {
@@ -67,11 +94,18 @@ message UserTokenRequestProtobufDTO {
     required string verificationCode = 2;
 }
 
+// endpoint URL: "/requestUserTokenForFacebook"
+// returns UserTokenResponseProtobufDTO
+message UserTokenForFacebookRequestProtobufDTO {
+    required string fbAccessToken = 1;
+}
+
 message UserTokenResponseProtobufDTO {
    /* 401 Unauthorized
         IS_NOT_REGISTERED
     * 422 Unprocessable Entity
         NOT_MATCHED                     if verification code is not valid
+        FACEBOOK_INVALID_CREDENTIALS    if incorrect facebook token
     * 423 Locked
         TOO_MANY_VERIFICATION_ATTEMPTS  if there were too many attempts
     * 424 Failed Dependency
@@ -89,6 +123,7 @@ message LoginWithUserTokenAndPinRequestProtobufDTO {
 
 // endpoint URL: "/loginWithFacebookAndPin" -> LoginResponseProtobufDTO
 // endpoint URL: "/loginWithFacebookAndPinAttempts" -> LoginWithPinAttemptsResponseProtobufDTO
+//DEPRECATED
 message LoginWithFacebookAndPinRequestProtobufDTO {
     required string fbAccessToken = 1;
     required int32 pin = 2;
@@ -96,6 +131,7 @@ message LoginWithFacebookAndPinRequestProtobufDTO {
 
 // endpoint URL: "/loginWithFacebookAndPinRecoveryCode"
 // returns LoginResponseProtobufDTO
+//DEPRECATED
 message LoginWithFacebookAndPinRecoveryCodeRequestProtobufDTO {
     required string fbAccessToken = 1;
     required string pinRecoveryCode = 2;
@@ -148,7 +184,7 @@ message LoginResponseProtobufDTO {
 
 //endpoint URL: "/getRemainingPinAttempts"
 message GetRemainingPinAttemptsRequestProtobufDTO {
-    optional string fbAccessToken = 1;
+    optional string fbAccessToken = 1 [deprecated=true];
     optional string userToken = 2;
 }
 
@@ -229,6 +265,7 @@ message EstablishEmailRequestProtobufDTO {
 }
 
 // endpoint URL: "/sendPinRecoveryCode"
+//DEPRECATED
 message SendPinRecoveryCodeRequestProtobufDTO {
     required string fbAccessToken = 1;
 }
@@ -844,7 +881,7 @@ message ReIssueCardInfoResponseProtobufDTO {
 //        TooManyRequests(429)     if the verification was requested too many times
 message VerificationCodeRequestProtobufDTO {
     required string phoneNumber = 1; //only digits
-    optional string fbAccessToken = 2;
+    optional string fbAccessToken = 2 [deprecated=true];
 }
 
 //endpoint URL: "/getTransactionCategories"
