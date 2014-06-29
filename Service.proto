@@ -18,7 +18,7 @@ message DiagnosticMessageProtobufDTO {
 //** LOGIN **
 
 // endpoint URL: "/registerWithFacebook"
-//DEPRECATED
+//DEPRECATED use RegisterWithPhoneRequestProtobufDTO
 message RegisterWithFacebookRequestProtobufDTO {
     required string fbAccessToken = 1;
     optional string phoneNumber = 2;
@@ -123,7 +123,7 @@ message LoginWithUserTokenAndPinRequestProtobufDTO {
 
 // endpoint URL: "/loginWithFacebookAndPin" -> LoginResponseProtobufDTO
 // endpoint URL: "/loginWithFacebookAndPinAttempts" -> LoginWithPinAttemptsResponseProtobufDTO
-//DEPRECATED
+//DEPRECATED use LoginWithUserTokenAndPinRequestProtobufDTO
 message LoginWithFacebookAndPinRequestProtobufDTO {
     required string fbAccessToken = 1;
     required int32 pin = 2;
@@ -131,9 +131,16 @@ message LoginWithFacebookAndPinRequestProtobufDTO {
 
 // endpoint URL: "/loginWithFacebookAndPinRecoveryCode"
 // returns LoginResponseProtobufDTO
-//DEPRECATED
+//DEPRECATED, use loginWithPinRecoveryCode
 message LoginWithFacebookAndPinRecoveryCodeRequestProtobufDTO {
     required string fbAccessToken = 1;
+    required string pinRecoveryCode = 2;
+}
+
+// endpoint URL: "/loginWithPinRecoveryCode"
+// returns LoginResponseProtobufDTO
+message LoginWithPinRecoveryCodeRequestProtobufDTO {
+    required string userToken = 1;
     required string pinRecoveryCode = 2;
 }
 
@@ -265,7 +272,8 @@ message EstablishEmailRequestProtobufDTO {
 }
 
 // endpoint URL: "/sendPinRecoveryCode"
-//DEPRECATED
+// returns: SendPinRecoveryCodeResponseProtobufDTO
+//DEPRECATED use recoverWithSecurityWord
 message SendPinRecoveryCodeRequestProtobufDTO {
     required string fbAccessToken = 1;
 }
@@ -273,7 +281,7 @@ message SendPinRecoveryCodeRequestProtobufDTO {
 message SendPinRecoveryCodeResponseProtobufDTO {
     /* 412 Precondition Failed if pin not established for user
         PIN_NOT_ESTABLISHED if pin not established for user
-        SOCIAL_CONFIDANT_NOT_ESTABLISHED if social confidant not established for used
+        SOCIAL_CONFIDANT_NOT_ESTABLISHED if social confidant not established for user
         PIN_NOT_BANNED
     * 401 Unauthorized with protobuf entity DiagnosticMessageProtobufDTO which contains
         IS_NOT_REGISTERED if this facebook user is not registered in system - use /registerWithFacebook
@@ -285,6 +293,23 @@ message SendPinRecoveryCodeResponseProtobufDTO {
     }
 
     required Status status = 1;
+}
+
+// endpoint URL: "/recoverWithSecurityWord"
+// returns: HTTP 200 if recovery code sent, or:
+    /* 412 Precondition Failed
+        PIN_NOT_BANNED
+        PIN_NOT_ESTABLISHED if pin not established for user
+        SECURITY_WORD_NOT_ESTABLISHED if security word is not established for user
+        SECURITY_WORD_NOT_MATCH if security word not match
+        SECURITY_WORD_BLOCKED if security word blocked and user should call to bank to restore access
+        SECURITY_WORD_TIMEOUT;%d to prevent frequent calls, user should repeat after %d seconds
+    * 401 Unauthorized with protobuf entity DiagnosticMessageProtobufDTO which contains
+        IS_NOT_REGISTERED if this facebook user is not registered in system - use 
+    */
+message RecoverWithSecurityWordRequestProtobufDTO {
+    required string userToken = 1;
+    required string securityWord = 2;
 }
 
 // Requested using GET method
@@ -326,7 +351,7 @@ message CloseWalletRequestProtobufDTO {
 message CloseWalletResponseProtobufDTO {
 }
 
-// deprecated endpoint URL: "/getUserSocialNetworkIds"
+//endpoint URL: "/getUserSocialNetworkIds"
 message GetSocialNetworkIdsRequestProtobufDTO {
     repeated string instabankIds = 1;
 }
@@ -335,7 +360,7 @@ message GetSocialNetworkIdsResponseProtobufDTO {
     repeated InstaSocialIdsMappingDTO ids = 1;
 }
 
-// deprecated endpoint URL: "/getInstabankUserIds"
+//endpoint URL: "/getInstabankUserIds"
 message GetInstabankIdsRequestProtobufDTO {
     repeated string facebookIds = 1;
     repeated string phones = 2;
@@ -663,7 +688,7 @@ message IsVersionCompatibleResponseProtobufDTO {
 
 // endpoint URL: "/getLocations"
 // returns: LocationsResponseProtobufDTO
-// deprecated
+// deprecated use /v2/getLocations
 message LocationsRequestProtobufDTO {
     optional int64 lastUpdateTime = 1;
 }
@@ -793,7 +818,6 @@ message MakeTemplateProtobufResponseDTO {
 
 
 //endpoint URL: "/inviteFriends"
-// deprecated
 message InviteFriendsRequestProtobufDTO {
     required string facebookToken       = 1;
     repeated string facebookIds         = 2;
