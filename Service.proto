@@ -46,8 +46,7 @@ message RegisterWithPhoneRequestProtobufDTO {
 // endpoint URL: "/getRecoveryOptions"
 // returns GetRecoveryOptionsRequestProtobufDTO
 message GetRecoveryOptionsRequestProtobufDTO {
-    optional string fbAccessToken = 1 [deprecated=true];
-    optional string userToken = 2;
+    required string userToken = 1;
 }
 
 message GetRecoveryOptionsResponseProtobufDTO {
