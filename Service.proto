@@ -169,6 +169,9 @@ message LoginResponseProtobufDTO {
         WRONG_PHONE_NUMBER_FORMAT       if the phone is not valid
         NOT_MATCHED                     if verification code is not valid
         MALFORMED_EMAIL_ADDRESS         if email address is malformed
+        INVALID_FIRST_NAME              if first name is blank or whatever
+        INVALID_LAST_NAME               if last name is blank or whatever
+        INVALID_GENDER                  if gender is UNKNOWN
     * 423 Locked
         TOO_MANY_VERIFICATION_ATTEMPTS  if there were too many attempts
     */
