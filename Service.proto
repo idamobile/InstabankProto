@@ -176,11 +176,12 @@ message LoginResponseProtobufDTO {
         TOO_MANY_VERIFICATION_ATTEMPTS  if there were too many attempts
     */
 
+    //DEPRECATED
     enum Status {
         OK = 1;
     }
 
-    required Status status = 1;
+    optional Status status = 1 [deprecated=true];
     optional string sessionId = 2;
     optional string userId = 3;
     required CardOrderStatus cardOrderStatus    = 4;
