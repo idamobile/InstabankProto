@@ -1008,7 +1008,8 @@ message GetC2CLimitsProtobufResponseDTO {
     repeated string possibleErrorMessages = 2;
 }
 
-//endpoint URL: GET "/getTextResource"
+//endpoint URL: POST "/getTextResource"
+//returns GetTextResourceResponseProtobufDTO
 message GetTextResourceRequestProtobufDTO {
     repeated string resourceId = 1;
 }
@@ -1017,5 +1018,16 @@ message GetTextResourceResponseProtobufDTO {
     repeated FieldValueProtobufDTO resources = 1;
 }
 
+//endpoint URL: POST "/updateAccountDetails"
+//returns UpdateAccountDetailsResponseProtobufDTO
+message UpdateAccountDetailsRequestProtobufDTO {
+    required Gender gender = 1;
+    required string firstName = 2;
+    required string lastName = 3;
+    optional string userImageResourceId = 4;
+    optional string coverImageResourceId = 5;
+}
 
-
+message UpdateAccountDetailsResponseProtobufDTO {
+    required InstabankAccountDTO account = 1;
+}
