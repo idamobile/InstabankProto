@@ -114,7 +114,7 @@ message UserTokenResponseProtobufDTO {
     required InstabankAccountDTO account = 2;
 }
 
-// endpoint URL: "/loginWithUserTokenAndPin" -> LoginResponseProtobufDTO
+// endpoint URL: "/loginWithUserTokenAndPin" -> LoginWithPinAttemptsResponseProtobufDTO
 message LoginWithUserTokenAndPinRequestProtobufDTO {
     required string userToken = 1;
     required int32 pin = 2;
