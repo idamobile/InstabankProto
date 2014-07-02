@@ -187,6 +187,7 @@ message LoginResponseProtobufDTO {
     required CardOrderStatus cardOrderStatus    = 4;
     optional bool newOfferContractExists        = 5;
     optional string userToken = 6;
+    optional InstabankAccountDTO account = 7;
 }
 
 //** LOGIN END **
