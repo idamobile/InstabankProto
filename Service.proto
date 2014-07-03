@@ -88,6 +88,9 @@ message GetFacebookTokenResponseProtobufDTO {
 
 // endpoint URL: "/requestUserToken"
 // returns UserTokenResponseProtobufDTO
+// 401 Unauthorized: IS_NOT_REGISTERED
+// 422 Unprocessable Entity: bad verification code (wrong or not requested)
+
 message UserTokenRequestProtobufDTO {
     required string phoneNumber = 1;
     required string verificationCode = 2;
