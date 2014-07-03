@@ -205,6 +205,7 @@ message GetRemainingPinAttemptsResponseProtobufDTO {
     * 401 Unauthorized with protobuf entity DiagnosticMessageProtobufDTO which contains
         IS_NOT_REGISTERED {LoginWithFacebookAndPinRequestProtobufDTO, LoginWithFacebookAndPinRecoveryCodeRequestProtobufDTO} if this facebook user is not registered in system - use /registerWithFacebook
         FACEBOOK_INVALID_CREDENTIALS {RegisterWithFacebookRequestProtobufDTO, LoginWithFacebookAndPinRequestProtobufDTO, LoginWithFacebookAndPinRecoveryCodeRequestProtobufDTO} if incorrect facebook credentials
+      422 Unprocessable entity: all fields are empty
     */
 
     required int32 attemptsCount = 1;
