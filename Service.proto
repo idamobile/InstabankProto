@@ -75,6 +75,9 @@ message ConnectOrUpdateFacebookTokenRequestProtobufDTO {
 message DisconnectFacebookRequestProtobufDTO {
 }
 
+message DisconnectFacebookResponseProtobufDTO {
+}
+
 // should return long-lived token
 // endpoint GET URL: "/getFacebookToken"
 // returns HTTP 412 if no access token connected
