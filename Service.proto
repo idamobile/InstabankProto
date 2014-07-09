@@ -71,7 +71,7 @@ message ConnectOrUpdateFacebookTokenRequestProtobufDTO {
 }
 
 // endpoint URL: "/disconnectFacebook"
-// returns HTTP 200
+// returns HTTP 204
 message DisconnectFacebookRequestProtobufDTO {
 }
 
