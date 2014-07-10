@@ -249,6 +249,7 @@ message EstablishPhoneNumberRequestProtobufDTO {
     required string verificationCode = 2;
 }
 
+
 //endpoint URL: "/establishSocialConfidant"
 message EstablishSocialConfidantRequestProtobufDTO {
     required string facebookId = 1;
@@ -987,6 +988,11 @@ message GetRefillTrackerStatusResponseProtobufDTO {
      * Count of free transfers according to conditions
      */    
     required int32 maxFreeTransfersCount = 5;
+
+    /*
+     * 30-days free-refill term termination date
+     */
+    optional int64 termTerminationDate = 6;
 }
 
 //endpoint URL: GET "/getRefillCommission"
