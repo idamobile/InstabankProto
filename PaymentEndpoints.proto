@@ -1,0 +1,185 @@
+option java_package = "com.idamobile.instabank.dto.protobuf";
+
+option java_outer_classname = "PaymentEndpoints";
+
+import "Commons.proto";
+import "Entities.proto";
+import "Events.proto";
+import "Wallets.proto";
+import "Social.proto";
+import "Notifications.proto";
+import "Locations.proto";
+import "Forms.proto";
+
+// endpoint URL: "/createTransferMoney"
+// returns TransactionProtobufDTO
+message CreateTransferMoneyRequestProtobufDTO {
+    required EnvelopeProtobufDTO envelope = 1;
+    required int64 amount = 2;
+    required string recipientId = 3;
+    required bool existingUser = 4;
+    optional string fbAccessToken = 5;
+    optional string requestId = 6;
+}
+
+// endpoint URL: "/fulfillMoneyRequest"
+// returns MoneyRequestProtobufDTO
+message FulfillMoneyRequestRequestProtobufDTO {
+    required string orderId = 1;
+    required int64 amount = 2;
+    optional string message = 3;
+    optional string requestId = 4;
+}
+
+// endpoint URL: "/withdraw"
+// HTTP 422 on negative amount
+message WithdrawRequestProtobufDTO {
+    required int64 amount = 1;
+    //payment's details
+    optional string message = 2;
+    /* keys:
+    *  "CUSTOMER_NAME"
+    *  "INN"
+    *  "ACCOUNT_NUMBER"
+    *  "BANK_NAME"
+    *  "BIK"
+    *  "CORRESPONDENT_ACCOUNT"
+    *  "PAYMENT_PURPOSE"
+    *  "PAYMENT_ACCOUNT" - should not be displayed on client; used as a source account for payments
+    */
+    repeated FieldValueProtobufDTO requisites = 3;
+}
+
+// endpoint URL "/getExternalTransferCommission"
+// returns GetExternalTransferCommissionResponseProtobufDTO
+// 422 on wrong requisites
+message GetExternalTransferCommissionRequestProtobufDTO {
+    required int64 amount = 1;
+    /* keys:
+    *  "CUSTOMER_NAME"
+    *  "BIK"
+    *  "ACCOUNT_NUMBER"
+    *  TODO: consider creating separate DTO for requisites
+    */
+    repeated FieldValueProtobufDTO requisites = 2;
+}
+
+message GetExternalTransferCommissionResponseProtobufDTO {
+    required int64 commissionAmount = 1;
+}
+
+//endpoint URL: "/getBeneficiaryCategories"
+//return: GetBeneficiaryCategoriesResponseProtobufDTO
+message GetBeneficiaryCategoriesRequestProtobufDTO {
+    optional string dataHash = 1;
+}
+
+message GetBeneficiaryCategoriesResponseProtobufDTO {
+    optional string dataHash = 1;
+    repeated BeneficiaryCategory beneficiaryCategories = 2;
+}
+
+//endpoint URL: "/getPaymentCommission"
+//return: GetPaymentCommissionResponseProtobufDTO
+message GetPaymentCommissionRequestProtobufDTO {
+    required FilledForm filledForm = 1;
+}
+
+message GetPaymentCommissionResponseProtobufDTO {
+    required int64 amount = 1;
+}
+
+// endpoint URL: "/performBeneficiaryPayment"
+// returns TransactionProtobufDTO
+// 422 on wrong requisites or invalid amount
+message PerformPaymentProtobufRequestDTO {
+    required FilledForm filledFormDTO = 1;
+    required int64 amount = 2;
+    optional int64 commission = 3;
+    optional string requestId = 4;
+}
+
+//endpoint URL: "/getNextPaymentForm"
+//return: GetNextFormProtobufResponseDTO
+// 422 on wrong requisites or invalid amount
+message GetNextFormProtobufRequestDTO {
+    required FilledForm filledFormDTO = 1;
+}
+
+message GetNextFormProtobufResponseDTO {
+    required FilledForm filledFormDTO = 1;
+    required Form formDTO = 2;
+}
+
+//endpoint URL: GET "/getTemplates"
+message GetTemplatesProtobufResponseDTO {
+    repeated Template templates = 1;
+}
+
+//endpoint URL: "/makeTemplate"
+//return MakeTemplateResponseDTO
+message MakeTemplateProtobufRequestDTO {
+    required string name = 1;
+    required string beneficiaryId = 2;
+    required FilledForm filledForm = 3;
+}
+
+message MakeTemplateProtobufResponseDTO {
+    required Template template = 1;
+}
+
+
+//endpoint URL: "/getStandardForms"
+message GetStandardFormsRequestProtobufDTO {
+    optional int32 dataHash = 1;
+}
+
+//empty response if there is no changes
+//filled dataHash & standardForms otherwise
+message GetStandardFormsResponseProtobufDTO {
+    optional int32 dataHash = 1;
+    optional BeneficiaryCategory standardForms = 2;
+}
+
+//endpoint URL: GET "/getRefillTrackerStatus"
+message GetRefillTrackerStatusResponseProtobufDTO {
+    required int32 currentMonth = 1;
+    required int32 currentYear = 2;
+
+    /*
+     * In case of VC contains number of overall transfers.
+     * In case of Plastic contains number of transfers during current month.
+     */
+    required int32 completedTransfersCount = 3;
+
+    /*
+     * Number of free transfers left
+     */
+    required int32 remainingFreeTransfersCount = 4;
+
+    /*
+     * Count of free transfers according to conditions
+     */    
+    required int32 maxFreeTransfersCount = 5;
+
+    /*
+     * 30-days free-refill term termination date
+     */
+    optional int64 termTerminationDate = 6;
+}
+
+//endpoint URL: GET "/getRefillCommission"
+message GetRefillCommissionRequestProtobufDTO {
+    required int64 amount = 1;
+}
+
+message GetRefillCommissionResponseProtobufDTO {
+    required int64 commissionAmount = 1;
+}
+
+//endpoint URL: GET "/getC2CLimits"
+// Accept-Language header param should be set
+message GetC2CLimitsProtobufResponseDTO {
+    required int64 allowedAmount = 1;
+    repeated string possibleErrorMessages = 2;
+}

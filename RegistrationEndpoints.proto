@@ -1,0 +1,50 @@
+option java_package = "com.idamobile.instabank.dto.protobuf";
+
+option java_outer_classname = "RegistrationEndpoints";
+
+import "Commons.proto";
+import "Entities.proto";
+import "Events.proto";
+import "Wallets.proto";
+import "Social.proto";
+import "Notifications.proto";
+import "Locations.proto";
+import "Forms.proto";
+
+// endpoint URL: "/registerWithFacebook"
+//DEPRECATED use RegisterWithPhoneRequestProtobufDTO
+message RegisterWithFacebookRequestProtobufDTO {
+    required string fbAccessToken = 1;
+    optional string phoneNumber = 2;
+    optional string verificationCode = 3;
+    optional string email = 4;
+}
+
+// endpoint URL: "/registerWithPhone"
+message RegisterWithPhoneRequestProtobufDTO {
+    required string phoneNumber = 1;
+    required string verificationCode = 2;
+    required string email = 3;
+    required string firstName = 4;
+    required string lastName = 5;  
+    required Gender gender = 6;  
+}
+
+//endpoint URL: agreeWithOfferContract
+message AgreeWithOfferContractRequestProtobufDTO {
+
+}
+
+
+//endpoint URL: "/requestPhoneVerification"
+//returns OK(200) or
+//        UnprocessableEntity(422) if the phone is not valid or
+//        Conflict(409)            if the phone was already attached to another user or (checked only if one of the tokens presents)
+//        Unauthorized(401)        if the fbAccessToken or userToken is not valid
+//        TooManyRequests(429)     if the verification was requested too many times
+message VerificationCodeRequestProtobufDTO {
+    required string phoneNumber = 1; //only digits
+    optional string fbAccessToken = 2 [deprecated=true];
+}
+
+

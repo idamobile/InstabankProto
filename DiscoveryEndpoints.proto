@@ -1,0 +1,38 @@
+option java_package = "com.idamobile.instabank.dto.protobuf";
+
+option java_outer_classname = "DiscoveryEndpoints";
+
+import "Commons.proto";
+import "Entities.proto";
+import "Events.proto";
+import "Wallets.proto";
+import "Social.proto";
+import "Notifications.proto";
+import "Locations.proto";
+import "Forms.proto";
+
+// endpoint URL: "/openWallet"
+message OpenWalletRequestProtobufDTO {
+    required double latitude = 1;
+    required double longitude = 2;
+}
+
+message OpenWalletResponseProtobufDTO {
+}
+
+// endpoint URL: "/getNearestOpenWallets"
+message GetNearestOpenWalletsRequestProtobufDTO {
+    required double latitude = 1;
+    required double longitude = 2;
+}
+
+message GetNearestOpenWalletsResponseProtobufDTO {
+    repeated OpenWalletProtobufDTO wallets = 1;
+}
+
+// endpoint URL: "/closeWallet"
+message CloseWalletRequestProtobufDTO {
+}
+
+message CloseWalletResponseProtobufDTO {
+}

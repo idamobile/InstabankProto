@@ -1,0 +1,164 @@
+option java_package = "com.idamobile.instabank.dto.protobuf";
+
+option java_outer_classname = "SecurityEndpoints";
+
+import "Commons.proto";
+import "Entities.proto";
+import "Events.proto";
+import "Wallets.proto";
+import "Social.proto";
+import "Notifications.proto";
+import "Locations.proto";
+import "Forms.proto";
+
+// should return long-lived token
+// endpoint GET URL: "/getFacebookToken"
+// returns HTTP 412 if no access token connected
+message GetFacebookTokenResponseProtobufDTO {
+    required string fbAccessToken = 1;
+    required int64 expires = 2;
+    repeated string permissions = 3;
+}
+
+//endpoint URL: GET "/getOptionsStatusesResponse"
+message GetOptionsStatusesResponseProtobufDTO {
+    required bool pinEstablished = 1;
+    required bool socialConfidantEstablished = 2;
+    optional string socialConfidantFacebookId = 3;
+    optional bool phoneNumberEstablished = 4;
+    optional string phoneNumber = 5;
+    optional int64 debtAmount   = 6;
+    optional bool securityWordEstablished   = 7;
+    optional string email = 8;
+}
+
+// endpoint URL: "/getRecoveryOptions"
+// returns GetRecoveryOptionsRequestProtobufDTO
+message GetRecoveryOptionsRequestProtobufDTO {
+    required string userToken = 1;
+}
+
+message GetRecoveryOptionsResponseProtobufDTO {
+/*
+    * 422 Unprocessable Entity 
+            IS_NOT_REGISTERED if this user is not registered in system
+*/
+    required bool socialConfidentEstablished = 1;
+    required bool securityWordEstablished = 2;
+}
+
+
+// endpoint URL: "/requestUserToken"
+// returns UserTokenResponseProtobufDTO
+message UserTokenRequestProtobufDTO {
+    required string phoneNumber = 1;
+    required string verificationCode = 2;
+}
+
+// endpoint URL: "/requestUserTokenForFacebook"
+// returns UserTokenResponseProtobufDTO
+message UserTokenForFacebookRequestProtobufDTO {
+    required string fbAccessToken = 1;
+}
+
+message UserTokenResponseProtobufDTO {
+   /* 401 Unauthorized
+        IS_NOT_REGISTERED
+    * 422 Unprocessable Entity
+        NOT_MATCHED                     if verification code is not valid
+        FACEBOOK_INVALID_CREDENTIALS    if incorrect facebook token
+    * 423 Locked
+        TOO_MANY_VERIFICATION_ATTEMPTS  if there were too many attempts
+    * 424 Failed Dependency
+        VERIFICATION_CODE_NOT_REQUESTED if the verificationCode was not requested yet    
+    */
+    required string userToken = 1;
+    required InstabankAccountDTO account = 2;
+}
+
+//endpoint URL: "/getRemainingPinAttempts"
+message GetRemainingPinAttemptsRequestProtobufDTO {
+    optional string fbAccessToken = 1 [deprecated=true];
+    optional string userToken = 2;
+}
+
+message GetRemainingPinAttemptsResponseProtobufDTO {
+    /* 412 Precondition Failed if pin not established for user
+
+    * 401 Unauthorized with protobuf entity DiagnosticMessageProtobufDTO which contains
+        IS_NOT_REGISTERED {LoginWithFacebookAndPinRequestProtobufDTO, LoginWithFacebookAndPinRecoveryCodeRequestProtobufDTO} if this facebook user is not registered in system - use /registerWithFacebook
+        FACEBOOK_INVALID_CREDENTIALS {RegisterWithFacebookRequestProtobufDTO, LoginWithFacebookAndPinRequestProtobufDTO, LoginWithFacebookAndPinRecoveryCodeRequestProtobufDTO} if incorrect facebook credentials
+      422 Unprocessable entity: all fields are empty
+    */
+
+    required int32 attemptsCount = 1;
+}
+
+//endpoint URL: "/establishPin"
+message EstablishPinRequestProtobufDTO {
+    required int32 pin = 1;
+}
+
+message EstablishPinResponseProtobufDTO {
+}
+
+//endpoint URL: "/establishSocialConfidant"
+message EstablishSocialConfidantRequestProtobufDTO {
+    required string facebookId = 1;
+}
+
+message EstablishSocialConfidantResponseProtobufDTO {
+
+}
+
+// endpoint URL: "/establishSecurityWord"
+// returns:
+//      UnprocessableEntity(422)
+//         WRONG_WORD_FORMAT       if the word contains derecated symbols (' ','\t','\n','\r')
+//         WORD_IS_TO_SHORT;%d     if the word length is lower than %d symbols 
+//      OK(200)
+message EstablishSecurityWordRequestProtobufDTO {
+    required string securityWord = 1;
+}
+
+// endpoint URL: "/sendPinRecoveryCode"
+// returns: SendPinRecoveryCodeResponseProtobufDTO
+//DEPRECATED use recoverWithSecurityWord
+message SendPinRecoveryCodeRequestProtobufDTO {
+    required string fbAccessToken = 1;
+}
+
+message SendPinRecoveryCodeResponseProtobufDTO {
+    /* 412 Precondition Failed if pin not established for user
+        PIN_NOT_ESTABLISHED if pin not established for user
+        SOCIAL_CONFIDANT_NOT_ESTABLISHED if social confidant not established for user
+        PIN_NOT_BANNED
+    * 401 Unauthorized with protobuf entity DiagnosticMessageProtobufDTO which contains
+        IS_NOT_REGISTERED if this facebook user is not registered in system - use /registerWithFacebook
+        FACEBOOK_INVALID_CREDENTIALS if incorrect facebook credentials
+    */
+
+    enum Status {
+        OK = 1;
+    }
+
+    required Status status = 1;
+}
+
+// endpoint URL: "/recoverWithSecurityWord"
+// returns: HTTP 200 if recovery code sent, or:
+    /* 412 Precondition Failed
+        PIN_NOT_BANNED
+        PIN_NOT_ESTABLISHED if pin not established for user
+        SECURITY_WORD_NOT_ESTABLISHED if security word is not established for user
+        SECURITY_WORD_NOT_MATCH if security word not match
+        SECURITY_WORD_BLOCKED if security word blocked and user should call to bank to restore access
+        SECURITY_WORD_TIMEOUT;%d to prevent frequent calls, user should repeat after %d seconds
+    * 401 Unauthorized with protobuf entity DiagnosticMessageProtobufDTO which contains
+        IS_NOT_REGISTERED if this facebook user is not registered in system - use 
+    */
+message RecoverWithSecurityWordRequestProtobufDTO {
+    required string userToken = 1;
+    required string securityWord = 2;
+}
+

@@ -1,0 +1,135 @@
+option java_package = "com.idamobile.instabank.dto.protobuf";
+
+option java_outer_classname = "CommonEndpoints";
+
+import "Commons.proto";
+import "Entities.proto";
+import "Events.proto";
+import "Wallets.proto";
+import "Social.proto";
+import "Notifications.proto";
+import "Locations.proto";
+import "Forms.proto";
+
+// endpoint URL: GET "/isSessionAlive"
+// returns OK(200) or FORBIDDEN (403)
+
+
+//endpoint URL: "/getUserSocialNetworkIds"
+message GetSocialNetworkIdsRequestProtobufDTO {
+    repeated string instabankIds = 1;
+}
+
+message GetSocialNetworkIdsResponseProtobufDTO {
+    repeated InstaSocialIdsMappingDTO ids = 1;
+}
+
+//endpoint URL: "/getInstabankUserIds"
+message GetInstabankIdsRequestProtobufDTO {
+    repeated string facebookIds = 1;
+    repeated string phones = 2;
+}
+
+message GetInstabankIdsResponseProtobufDTO {
+    repeated InstaSocialIdsMappingDTO ids = 1;
+}
+
+//endpoint URL: "/registerDevicePushId"
+message RegisterDevicePushIdRequestProtobufDTO {
+    required string devicePushId = 1;
+
+    enum Platform {
+        IOS = 0;
+        ANDROID = 1;
+    }
+
+    optional Platform platform = 2 [default = IOS];
+}
+
+message RegisterDevicePushIdResponseProtobufDTO {
+}
+
+// endpoint URL: "/remindAboutOrder"
+message RemindAboutOrderRequestProtobufDTO {
+    required string orderId = 1;
+    optional string text = 2;
+}
+
+message RemindAboutOrderResponseProtobufDTO {
+    enum Status {
+        OK = 0;
+        ATTEMPTS_COUNT_EXCEEDED = 1;
+        REMINDING_TOO_SOON = 2;
+    }
+    optional Status status = 1;
+}
+
+// endpoint URL: "/inconsistentDataReport"
+// returns null
+message InconsistentDataReportRequestProtobufDTO {
+    optional string id = 1;
+    optional string dataType = 2;
+    optional string info = 3;
+}
+
+// endpoint URL: "/isVersionCompatible"
+message IsVersionCompatibleRequestProtobufDTO {
+    required string version = 1;
+}
+
+message IsVersionCompatibleResponseProtobufDTO {
+    required bool isCompatible = 1;
+}
+
+//endpoint URL: "/inviteFriends"
+// return: NO_CONTENT (204)
+message InviteFriendsRequestProtobufDTO {
+    required string facebookToken       = 1;
+    repeated string facebookIds         = 2;
+    optional string text                = 3;
+}
+
+//endpoint URL: "/searchActivities"
+message SearchActivitiesRequestProtobufDTO {
+    optional string query = 1;
+}
+
+message SearchActivitiesResponseProtobufDTO {
+    repeated EntityContainerProtobufDTO items = 2;
+}
+
+//endpoint URL: POST "/getTextResource"
+//returns GetTextResourceResponseProtobufDTO
+message GetTextResourceRequestProtobufDTO {
+    repeated string resourceId = 1;
+}
+
+message GetTextResourceResponseProtobufDTO {
+    repeated FieldValueProtobufDTO resources = 1;
+}
+
+//endpoint URL: GET "/getC2CTextResources"
+// Accept-Language header param should be set
+message GetC2CTextResourcesProtobufResponseDTO {
+    optional string limitsText = 1;
+}
+
+
+// Balance from Bank. Requested using GET method.
+// endpoint URL: "/getBalance"
+message GetBalanceResponseProtobufDTO {
+    optional int64 balance = 1;
+    //TODO: add error codes
+}
+
+
+// endpoint URL: GET "/getBankAccountRequisites"
+message GetBankAccountRequisitesProtobufResponseDTO {
+    repeated FieldValueProtobufDTO fields = 1;
+}
+
+// endpoint URL: GET "/getTerminalAccountRequisites"
+message GetTerminalAccountRequisitesProtobufResponseDTO {
+    repeated FieldValueProtobufDTO fields = 1;
+}
+

@@ -1,0 +1,140 @@
+option java_package = "com.idamobile.instabank.dto.protobuf";
+
+option java_outer_classname = "CardProcessingEndpoints";
+
+import "Commons.proto";
+import "Entities.proto";
+import "Events.proto";
+import "Wallets.proto";
+import "Social.proto";
+import "Notifications.proto";
+import "Locations.proto";
+import "Forms.proto";
+
+// endpoint URL: "/orderCard"
+message OrderCardRequestProtobufDTO {
+    required string firstname = 1;
+    required string lastname = 2;
+
+    //validation mask \d{11,12}
+    required string phoneNumber = 3;
+
+    //hh:mm:ss±hh:mm
+    required string callFromTime = 4;
+    required string callToTime = 5;
+
+    optional string predefinedDesignId = 6;
+    optional string imageResourceId = 7;
+
+    optional string email = 8;
+}
+
+/**
+* Return
+* HTTP 422 if validation of data provided by client failed
+*/
+message OrderCardResponseProtobufDTO {
+    required Result status = 1;
+
+    enum Result {
+        OK = 1;
+        ALREADY_HAVE_A_CARD = 2;
+        ALREADY_HAVE_AN_ORDER = 3;
+    }
+}
+
+// endpoint URL: GET "/getCardInfo"
+message GetCardInfoResponseProtobufDTO {
+
+    enum BlockReason {
+        BLOCKED_BY_BANK = 1;
+        REISSUE_IN_PROGRESS = 2;
+    }
+
+    required string number = 1;
+    required string holderName = 2;
+    required string validThru = 3;
+    optional string cvv = 4;
+    required bool cardExists = 5;
+    optional string predefinedDesignId = 6;
+    optional string imageResourceId = 7;
+    required bool blocked = 8;
+    required bool virtual = 9;
+    optional BlockReason blockReason = 10;
+}
+
+//endpoint URL: "/blockCard"
+message BlockCardRequestProtobufDTO {
+    //todo add block reason
+}
+
+//endpoint URL: "/reIssueCard"
+//returns:
+//    NO_CONTENT(204)
+//    PreconditionFailed(412) if not enouth balance for commission or reissue in progress
+//    TooManyRequests(429)
+message ReIssueCardRequestProtobufDTO {
+    // fast reissue. More expensive
+    // not used for virtual cards
+    optional bool express = 1;
+}
+
+//endpoint URL: "/reIssueCardInfo"
+// inqures commission fee & last reissue date & status of current reissuing process
+message ReIssueCardInfoRequestProtobufDTO {
+    required bool express = 1;
+}
+
+// or 412 PreconditionFailed - invalid account type: plastic card required
+message ReIssueCardInfoResponseProtobufDTO {
+    enum Status {
+        ORDER_SENT = 0;
+        SENDING_FAILED = 1;
+        COMPLETED = 2;
+    }
+    required int64 reissueFee = 1;
+    optional int64 lastReissueDate = 2;
+    optional Status lastReissueStatus = 3;
+}
+
+//endpoint URL: "/setPlasticCardLimits"
+// returns HTTP codes:
+// 204 - OK
+// 412 - user doesn't have plastic
+// 422 - invalid limit amount
+message SetPlasticCardLimitsRequestProtobufDTO {
+    optional int64 withdrawalDailyLimit = 1;
+    optional int64 withdrawalMonthlyLimit = 2;
+
+    optional int64 spendingDailyLimit = 3;
+    optional int64 spendingMonthlyLimit = 4;
+
+    optional bool lockOperations = 5;
+}
+
+//endpoint URL: GET "/getVirtualCardLimit"
+message GetVirtualCardLimitResponseProtobufDTO {
+    required LimitPairDTO limit     = 1;
+
+    /*
+    HTTP Error Codes:
+    412 Precondition Failed - user doesn't have a virtual card
+    500 Internal Server error - if limit was negative or not set bacause of Pasha - mudak
+    */
+
+}
+
+//endpoint URL: "/getPlasticCardLimits"
+// returns HTTP codes:
+// 412 - user doesn't have plastic
+message GetPlasticCardLimitsResponseProtobufDTO {
+
+    required LimitPairDTO withdrawalDailyLimit = 1;
+    required LimitPairDTO withdrawalMonthlyLimit = 2;
+
+    required LimitPairDTO spendingDailyLimit = 3;
+    required LimitPairDTO spendingMonthlyLimit = 4;
+
+    required bool lockOperations = 5;
+}
+

@@ -1,0 +1,95 @@
+option java_package = "com.idamobile.instabank.dto.protobuf";
+
+option java_outer_classname = "LoginEndpoints";
+
+import "Commons.proto";
+import "Entities.proto";
+import "Events.proto";
+import "Wallets.proto";
+import "Social.proto";
+import "Notifications.proto";
+import "Locations.proto";
+import "Forms.proto";
+
+// should be called if PIN not set
+// endpoint URL: "/loginWithUserToken"
+// returns LoginResponseProtobufDTO
+message LoginWithUserTokenRequestProtobufDTO {
+    required string userToken = 1;
+}
+
+// endpoint URL: "/loginWithUserTokenAndPin" -> LoginResponseProtobufDTO
+message LoginWithUserTokenAndPinRequestProtobufDTO {
+    required string userToken = 1;
+    required int32 pin = 2;
+}
+
+// endpoint URL: "/loginWithFacebookAndPin" -> LoginResponseProtobufDTO
+// endpoint URL: "/loginWithFacebookAndPinAttempts" -> LoginWithPinAttemptsResponseProtobufDTO
+//DEPRECATED use LoginWithUserTokenAndPinRequestProtobufDTO
+message LoginWithFacebookAndPinRequestProtobufDTO {
+    required string fbAccessToken = 1;
+    required int32 pin = 2;
+}
+
+// endpoint URL: "/loginWithFacebookAndPinRecoveryCode"
+// returns LoginResponseProtobufDTO
+//DEPRECATED, use loginWithPinRecoveryCode
+message LoginWithFacebookAndPinRecoveryCodeRequestProtobufDTO {
+    required string fbAccessToken = 1;
+    required string pinRecoveryCode = 2;
+}
+
+// endpoint URL: "/loginWithPinRecoveryCode"
+// returns LoginResponseProtobufDTO
+message LoginWithPinRecoveryCodeRequestProtobufDTO {
+    required string userToken = 1;
+    required string pinRecoveryCode = 2;
+}
+
+message LoginResponseProtobufDTO {
+    /* 412 Precondition Failed
+        LOGIN_WITH_PIN_REQUIRED {RegisterWithFacebookRequestProtobufDTO}
+        PIN_NOT_ESTABLISHED {LoginWithFacebookAndPinRequestProtobufDTO} if pin not established for user
+        CODE_NOT_ESTABLISHED {LoginWithFacebookAndPinRecoveryCodeRequestProtobufDTO}
+        PIN_NOT_BLOCKED {LoginWithFacebookAndPinRecoveryCodeRequestProtobufDTO}
+    * 401 Unauthorized with protobuf entity DiagnosticMessageProtobufDTO which contains
+        IS_NOT_REGISTERED {LoginWithFacebookAndPinRequestProtobufDTO, LoginWithFacebookAndPinRecoveryCodeRequestProtobufDTO} if this facebook user is not registered in system - use /registerWithFacebook
+        FACEBOOK_INVALID_CREDENTIALS {RegisterWithFacebookRequestProtobufDTO, LoginWithFacebookAndPinRequestProtobufDTO, LoginWithFacebookAndPinRecoveryCodeRequestProtobufDTO} if incorrect facebook credentials
+        USER_BLOCKED {RegisterWithFacebookRequestProtobufDTO} if user was banned
+        PIN_CHECK_FAILED {LoginWithFacebookAndPinRequestProtobufDTO} if incorrect pin
+        PIN_BANNED {LoginWithFacebookAndPinRequestProtobufDTO} if pin banned
+        CODE_CHECK_FAILED {LoginWithFacebookAndPinRecoveryCodeRequestProtobufDTO} if pin recovery code check failed
+        CODE_BLOCKED {LoginWithFacebookAndPinRecoveryCodeRequestProtobufDTO} if pin recovery code was blocked
+        REGISTRATION_CLOSED {RegisterWithFacebookRequestProtobufDTO} if registration is not available now
+    * 400 Bad Request
+        PHONE_REQUIRED {RegisterWithFacebookRequestProtobufDTO} if phone number required for registration
+        VERIFICATION_CODE_REQUIRED {RegisterWithFacebookRequestProtobufDTO} if verification code is required for registration
+    * 424 Failed Dependency
+        VERIFICATION_CODE_NOT_REQUESTED if the verificationCode was not requested yet
+    * 409 Conflict
+        PHONE_UNAVAILABLE               if the phoneNumber was already attached to another user
+    * 422 Unprocessable Entity
+        WRONG_PHONE_NUMBER_FORMAT       if the phone is not valid
+        NOT_MATCHED                     if verification code is not valid
+        MALFORMED_EMAIL_ADDRESS         if email address is malformed
+        INVALID_FIRST_NAME              if first name is blank or whatever
+        INVALID_LAST_NAME               if last name is blank or whatever
+        INVALID_GENDER                  if gender is UNKNOWN
+    * 423 Locked
+        TOO_MANY_VERIFICATION_ATTEMPTS  if there were too many attempts
+    */
+
+    //DEPRECATED
+    enum Status {
+        OK = 1;
+    }
+
+    optional Status status = 1 [deprecated=true];
+    optional string sessionId = 2;
+    optional string userId = 3;
+    required CardOrderStatus cardOrderStatus    = 4;
+    optional bool newOfferContractExists        = 5;
+    optional string userToken = 6;
+    optional InstabankAccountDTO account = 7;
+}

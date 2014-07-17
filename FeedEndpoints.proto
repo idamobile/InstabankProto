@@ -1,0 +1,115 @@
+option java_package = "com.idamobile.instabank.dto.protobuf";
+
+option java_outer_classname = "FeedEndpoints";
+
+import "Commons.proto";
+import "Entities.proto";
+import "Events.proto";
+import "Wallets.proto";
+import "Social.proto";
+import "Notifications.proto";
+import "Locations.proto";
+import "Forms.proto";
+
+// endpoint URL: "/createRequestMoney"
+// returns MoneyRequestProtobufDTO
+message CreateRequestMoneyRequestProtobufDTO {
+    required EnvelopeProtobufDTO envelope = 1;
+    required int64 amount = 2;
+    repeated string participantIds = 3;
+    // List of Facebook IDs of non-existent users
+    repeated string invitedParticipants = 4;
+    optional string fbAccessToken = 5;
+}
+
+// endpoint URL: "/describeEntity"
+// returns EntityContainerProtobufDTO
+message DescribeEntityRequestProtobufDTO {
+    required EnvelopeProtobufDTO envelope = 1;
+    // moneyRequest ID or transaction ID
+    required string entityId = 2;
+
+    /* 
+        Custom category ID, used only for external transactions. 
+        Otherwise ignored.
+    */
+    optional string transactionCategoryId = 3;
+}
+
+// endpoint URL: "/editParticipants"
+// returns MoneyRequestProtobufDTO
+message EditParticipantsRequestProtobufDTO {
+    required string orderId = 1;
+    repeated string participantIds = 2;
+}
+
+// endpoint URL: "/smartFetchActivity"
+message SmartFetchActivityRequestProtobufDTO {
+    required int32 pageSize = 1;
+    optional int64 firstItemTimestamp = 2;
+    optional int64 lastItemTimestamp = 3;
+    repeated string edgeItemIds = 4;
+    optional string friendId = 5;
+}
+
+message SmartFetchActivityResponseProtobufDTO {
+    repeated EntityContainerProtobufDTO updatedItems = 1;
+    repeated EntityContainerProtobufDTO requestedItems = 2;
+}
+
+// endpoint URL: "/fetchSingleEntity"
+// returns EntityContainerProtobufDTO
+message FetchSingleEntityRequestProtobufDTO {
+    required string entityId = 1;
+}
+
+// endpoint URL: "/unsubscribe"
+// returns HTTP_OK or error
+message UnsubscribeRequestProtobufDTO {
+    required string orderId = 1;
+    optional string message = 2;
+}
+
+// endpoint URL: "/removeOrder"
+// returns HTTP_OK or error
+message RemoveOrderRequestProtobufDTO {
+    required string orderId = 1;
+}
+
+// endpoint URL: "/commentOrder"
+// returns EntityContainerProtobufDTO
+message CommentOrderRequestProtobufDTO {
+    required string orderId = 1;
+    required string message = 2;
+}
+
+// endpoint URL: "/editComment"
+// returns EntityContainerProtobufDTO
+message EditCommentRequestProtobufDTO {
+    required string commentId = 1;
+    optional string message = 2;
+}
+
+//endpoint URL: "/getTransactionDescription"
+// returns OK(200) or FORBIDDEN(403) in case of transaction not owned by user
+message GetTransactionDescriptionRequestProtobufDTO {
+    required string transactionId = 1;
+}
+
+message GetTransactionDescriptionResponseProtobufDTO {
+    required Form form = 1;
+    required FilledForm filledForm = 2;
+    required string beneficiaryId = 3;
+}
+
+//endpoint URL: "/getTransactionCategories"
+message GetTransactionCategoriesRequestProtobufDTO {
+    optional string dataHash = 1;
+}
+
+message GetTransactionCategoriesResponseProtobufDTO {
+    repeated TransactionCategory categories = 1;
+    optional string dataHash = 2;
+}
+
+

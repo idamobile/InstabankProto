@@ -1,0 +1,82 @@
+option java_package = "com.idamobile.instabank.dto.protobuf";
+
+option java_outer_classname = "ProfileEndpoints";
+
+import "Commons.proto";
+import "Entities.proto";
+import "Events.proto";
+import "Wallets.proto";
+import "Social.proto";
+import "Notifications.proto";
+import "Locations.proto";
+import "Forms.proto";
+
+// endpoint URL: "/connectFacebook"
+// returns GetFacebookTokenResponseProtobufDTO if connection successful server returns long-lived token
+//         HTTP 422
+//            FB_CONNECTED_TO_ANOTHER_INSTA_USER if this fb connected to another user in Instabank
+//            FACEBOOK_INVALID_CREDENTIALS if incorrect facebook token
+message ConnectOrUpdateFacebookTokenRequestProtobufDTO {
+    required string fbAccessToken = 1;
+    required int64 expires = 2;
+    repeated string permissions = 3;
+    required bool longLivedToked = 4;
+}
+
+// endpoint URL: "/disconnectFacebook"
+// returns HTTP 204
+message DisconnectFacebookRequestProtobufDTO {
+}
+
+message DisconnectFacebookResponseProtobufDTO {
+}
+
+// endpoint URL: "/establishPhoneNumber"
+// returns:
+//      FailedDependency(424)
+//         VERIFICATION_CODE_NOT_REQUESTED if the verificationCode was not requested yet
+//      Conflict(409)
+//         PHONE_UNAVAILABLE               if the phoneNumber was already attached to another user
+//      UnprocessableEntity(422)
+//         WRONG_PHONE_NUMBER_FORMAT       if the phone is not valid
+//         NOT_MATCHED                     if verification code is not valid
+//      Locked(423)
+//         TOO_MANY_VERIFICATION_ATTEMPTS  if there were too many attempts
+//      OK(200)
+message EstablishPhoneNumberRequestProtobufDTO {
+    required string phoneNumber = 1;
+    required string verificationCode = 2;
+}
+
+// endpoint URL: "/establishEmail"
+// returns:
+//      UnprocessableEntity(422)
+//         MALFORMED_EMAIL_ADDRESS 
+//      OK(200)
+message EstablishEmailRequestProtobufDTO {
+    required string email = 1;
+}
+
+// endpoint URL: "/getAccountsStatus"
+message GetAccountsStatusRequestProtobufDTO {
+    repeated string instabankIds = 1;
+}
+
+message GetAccountsStatusResponseProtobufDTO {
+    repeated InstabankAccountDTO accounts = 1;
+}
+
+//endpoint URL: POST "/updateAccountDetails"
+//returns UpdateAccountDetailsResponseProtobufDTO
+message UpdateAccountDetailsRequestProtobufDTO {
+    required Gender gender = 1;
+    required string firstName = 2;
+    required string lastName = 3;
+    optional string userImageResourceId = 4;
+    optional string coverImageResourceId = 5;
+}
+
+message UpdateAccountDetailsResponseProtobufDTO {
+    required InstabankAccountDTO account = 1;
+}
+

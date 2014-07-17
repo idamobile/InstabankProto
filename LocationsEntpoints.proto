@@ -1,0 +1,79 @@
+option java_package = "com.idamobile.instabank.dto.protobuf";
+
+option java_outer_classname = "LocationsEndpoints";
+
+import "Commons.proto";
+import "Entities.proto";
+import "Events.proto";
+import "Wallets.proto";
+import "Social.proto";
+import "Notifications.proto";
+import "Locations.proto";
+import "Forms.proto";
+
+// endpoint URL: "/getLocations"
+// returns: LocationsResponseProtobufDTO
+// deprecated use /v2/getLocations
+message LocationsRequestProtobufDTO {
+    optional int64 lastUpdateTime = 1;
+}
+
+// deprecated
+message LocationsResponseProtobufDTO {
+    repeated LocationProtobufDTO modifiedLocations = 1;
+    repeated string removedLocationIds = 2;
+    repeated LocationServiceProtobufDTO modifiedServices = 3;
+    repeated string removedServiceIds = 4;
+    repeated LocationTypeProtobufDTO modifiedLocationTypes = 5;
+    repeated string removedLocationTypeIds = 6;
+    required int64 lastUpdateTime = 7;
+}
+
+/* Locations v2 */
+// endpoint URL: /v2/getLocations
+// returns LocationsV2ResponseProtobufDTO
+message LocationsV2RequestProtobufDTO {
+    optional int64 lastUpdateTime = 1;
+}
+
+message LocationsV2ResponseProtobufDTO {
+    repeated LocationProtobufDTO locations = 1;
+    repeated string removedIds = 2;
+    repeated LocationServiceProtobufDTO services = 3;
+    repeated LocationOwnerProtobufDTO owners = 4;
+    required int64 lastUpdateTime = 5;
+}
+
+// endpoint URL: GET /v2/getLocationsDictionary
+message LocationsV2DictionaryResponseProtobufDTO {
+    repeated LocationServiceProtobufDTO services = 1;
+    repeated LocationOwnerProtobufDTO owners = 2;
+}
+
+// endpoint URL: POST /v2/getLocationsViewport
+message LocationsViewportRequestProtobufDTO { 
+    required double centerLatitude = 1;
+    required double centerLongitude = 2;
+    required double latitudeSpan = 3;
+    required double longitudeSpan = 4;
+    required int32 zoomLevel = 5;
+    repeated string serviceIds = 6;
+}
+
+message LocationsViewportResponseProtobufDTO {
+    repeated LocationProtobufDTO locations = 1;
+    repeated ClusterProtobufDTO clusters = 2;
+}
+
+// endpoint URL: POST /v2/getNearestLocation 
+message NearestLocationRequestProtobufDTO {
+    required double latitude = 1;
+    required double longitude = 2;
+    repeated string serviceIds = 3;
+}
+
+message NearestLocationResponseProtobufDTO {
+    optional LocationProtobufDTO location = 1;
+}
+
+

@@ -1,6 +1,10 @@
 option java_package = "com.idamobile.instabank.dto.protobuf";
 option java_outer_classname = "Commons";
 
+message DiagnosticMessageProtobufDTO {
+    required string info = 1;
+}
+
 enum CommentType {
     REGULAR = 0;
     UNSUBSCRIBE = 1;
