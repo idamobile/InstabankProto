@@ -7,7 +7,6 @@ import "Entities.proto";
 import "Events.proto";
 import "Wallets.proto";
 import "Social.proto";
-import "Notifications.proto";
 import "Locations.proto";
 import "Forms.proto";
 
