@@ -56,7 +56,7 @@ message LoginResponseProtobufDTO {
         IS_NOT_REGISTERED {LoginWithFacebookAndPinRequestProtobufDTO, LoginWithFacebookAndPinRecoveryCodeRequestProtobufDTO} if this facebook user is not registered in system - use /registerWithFacebook
         FACEBOOK_INVALID_CREDENTIALS {RegisterWithFacebookRequestProtobufDTO, LoginWithFacebookAndPinRequestProtobufDTO, LoginWithFacebookAndPinRecoveryCodeRequestProtobufDTO} if incorrect facebook credentials
         USER_BLOCKED {RegisterWithFacebookRequestProtobufDTO} if user was banned
-        PIN_CHECK_FAILED {LoginWithFacebookAndPinRequestProtobufDTO} if incorrect pin
+        PIN_CHECK_FAILED;{number of remainging attempts} {LoginWithFacebookAndPinRequestProtobufDTO} if incorrect pin
         PIN_BANNED {LoginWithFacebookAndPinRequestProtobufDTO} if pin banned
         CODE_CHECK_FAILED {LoginWithFacebookAndPinRecoveryCodeRequestProtobufDTO} if pin recovery code check failed
         CODE_BLOCKED {LoginWithFacebookAndPinRecoveryCodeRequestProtobufDTO} if pin recovery code was blocked
