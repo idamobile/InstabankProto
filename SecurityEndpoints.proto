@@ -141,7 +141,7 @@ message SendPinRecoveryCodeResponseProtobufDTO {
         OK = 1;
     }
 
-    required Status status = 1;
+    required Status status = 1 [default = OK];
 }
 
 // endpoint URL: "/recoverWithSecurityWord"
