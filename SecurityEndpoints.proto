@@ -150,7 +150,7 @@ message SendPinRecoveryCodeResponseProtobufDTO {
         PIN_NOT_BANNED
         PIN_NOT_ESTABLISHED if pin not established for user
         SECURITY_WORD_NOT_ESTABLISHED if security word is not established for user
-        SECURITY_WORD_NOT_MATCH if security word not match
+        SECURITY_WORD_NOT_MATCH;%d if security word not match; %d seconds - if timer started and user should repeat after %d seconds
         SECURITY_WORD_BLOCKED if security word blocked and user should call to bank to restore access
         SECURITY_WORD_TIMEOUT;%d to prevent frequent calls, user should repeat after %d seconds
     * 401 Unauthorized with protobuf entity DiagnosticMessageProtobufDTO which contains
