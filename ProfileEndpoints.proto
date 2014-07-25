@@ -27,9 +27,6 @@ message ConnectOrUpdateFacebookTokenRequestProtobufDTO {
 message DisconnectFacebookRequestProtobufDTO {
 }
 
-message DisconnectFacebookResponseProtobufDTO {
-}
-
 // endpoint URL: "/establishPhoneNumber"
 // returns:
 //      FailedDependency(424)

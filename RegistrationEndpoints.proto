@@ -20,6 +20,7 @@ message RegisterWithFacebookRequestProtobufDTO {
 }
 
 // endpoint URL: "/registerWithPhone"
+// response: LoginResponseProtobufDTO
 message RegisterWithPhoneRequestProtobufDTO {
     required string phoneNumber = 1;
     required string verificationCode = 2;
