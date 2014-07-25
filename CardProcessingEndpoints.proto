@@ -30,7 +30,7 @@ message OrderCardRequestProtobufDTO {
 
 /**
 * Return
-* HTTP 422 if validation of data provided by client failed
+* HTTP 422, CARD_ORDER_DATA_VALIDATION_FAILED
 */
 message OrderCardResponseProtobufDTO {
     required Result status = 1;
