@@ -116,9 +116,10 @@ message GetC2CTextResourcesProtobufResponseDTO {
 
 // Balance from Bank. Requested using GET method.
 // endpoint URL: "/getBalance"
+// 412: BALANCE_UNAVAILABLE if something wrong with account type
+// 500: GET_BALANCE_FAILED integration failure
 message GetBalanceResponseProtobufDTO {
-    optional int64 balance = 1;
-    //TODO: add error codes
+    optional int64 balance = 1;    
 }
 
 
