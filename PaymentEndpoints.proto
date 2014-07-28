@@ -31,6 +31,7 @@ message FulfillMoneyRequestRequestProtobufDTO {
 }
 
 // endpoint URL: "/withdraw"
+// 412 {message} transfer forbidden by FL-110
 // HTTP 422 on negative amount
 message WithdrawRequestProtobufDTO {
     required int64 amount = 1;
