@@ -26,6 +26,6 @@ message InstabankAccountDTO {
     optional Gender gender = 3;
     optional string firstName = 4;
     optional string lastName = 5;
-    optional string userImageResourceId = 6;
-    optional string coverImageResourceId = 7;
+    optional string userImageUrl = 6;
+    optional string coverImageUrl = 7;
 }
