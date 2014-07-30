@@ -68,8 +68,8 @@ message UpdateAccountDetailsRequestProtobufDTO {
     required Gender gender = 1;
     required string firstName = 2;
     required string lastName = 3;
-    optional string userImageResourceId = 4;
-    optional string coverImageResourceId = 5;
+    optional string userImageUrl = 4;
+    optional string coverImageUrl = 5;
 }
 
 message UpdateAccountDetailsResponseProtobufDTO {
