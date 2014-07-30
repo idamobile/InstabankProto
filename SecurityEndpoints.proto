@@ -12,7 +12,7 @@ import "Forms.proto";
 
 // should return long-lived token
 // endpoint GET URL: "/getFacebookToken"
-// returns HTTP 412 if no access token connected
+// returns HTTP 412 FACEBOOK_TOKEN_NOT_FOUND
 message GetFacebookTokenResponseProtobufDTO {
     required string fbAccessToken = 1;
     required int64 expires = 2;
