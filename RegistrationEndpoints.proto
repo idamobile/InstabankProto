@@ -45,6 +45,7 @@ message AgreeWithOfferContractRequestProtobufDTO {
 message VerificationCodeRequestProtobufDTO {
     required string phoneNumber = 1; //only digits
     optional string fbAccessToken = 2 [deprecated=true];
+    optional string userToken = 3;
 }
 
 
