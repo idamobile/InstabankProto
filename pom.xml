@@ -10,6 +10,7 @@
     <!-- TODO move .proto source files to src/main/proto -->
 
     <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <protobuf.executable>/usr/local/bin/protoc</protobuf.executable>
     </properties>
 
