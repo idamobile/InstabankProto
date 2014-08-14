@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.idamobile.instabank</groupId>
+    <artifactId>protobuf-dto</artifactId>
+    <version>0.1</version>
+    <name>${project.groupId}:${project.artifactId}</name>
+    <packaging>jar</packaging>
+    <inceptionYear>2014</inceptionYear>
+    <!-- TODO move .proto source files to src/main/proto -->
+
+    <properties>
+        <protobuf.executable>/usr/local/bin/protoc</protobuf.executable>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.google.protobuf</groupId>
+            <artifactId>protobuf-java</artifactId>
+            <version>2.4.1</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>1.7</version>
+                <executions>
+                    <execution>
+                        <id>compile-protoc-v1</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <target>
+                                <path id="proto1.path">
+                                    <fileset dir="${basedir}/.">
+                                        <include name="*.proto" />
+                                    </fileset>
+                                </path>
+                                <pathconvert pathsep=" " property="proto1.files" refid="proto1.path" />
+
+                                <mkdir dir="${basedir}/target"/>
+                                <mkdir dir="${basedir}/target/generated-sources"/>
+                                <mkdir dir="${basedir}/target/generated-sources/protobuf"/>
+
+                                <exec executable="${protobuf.executable}">
+                                    <arg value="--java_out=${basedir}/target/generated-sources/protobuf"/>
+                                    <arg value="-I${basedir}/target/protobuf" />
+                                    <arg line="${proto1.files}"/>
+                                    <arg line="--proto_path=${basedir}"/>
+                                </exec>
+                            </target>
+                            <sourceRoot>${basedir}/target/generated-sources/protobuf</sourceRoot>
+                            <failOnError>true</failOnError>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+        </plugins>
+
+    </build>
+</project>
