@@ -9,6 +9,10 @@
     <inceptionYear>2014</inceptionYear>
     <!-- TODO move .proto source files to src/main/proto -->
 
+    <scm>
+        <connection>scm:git:git@github.com:idamobile/InstabankProto.git</connection>
+    </scm>
+
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <protobuf.executable>/usr/local/bin/protoc</protobuf.executable>
