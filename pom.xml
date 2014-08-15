@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.idamobile.instabank</groupId>
     <artifactId>protobuf-dto</artifactId>
-    <version>0.1</version>
+    <version>1.0-SNAPSHOT</version>
     <name>${project.groupId}:${project.artifactId}</name>
     <packaging>jar</packaging>
     <inceptionYear>2014</inceptionYear>
@@ -13,6 +13,17 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <protobuf.executable>/usr/local/bin/protoc</protobuf.executable>
     </properties>
+
+    <distributionManagement>
+        <repository>
+            <id>releases</id>
+            <url>http://nexus.idamob.ru/content/repositories/releases</url>
+        </repository>
+        <snapshotRepository>
+            <id>snapshots</id>
+            <url>http://nexus.idamob.ru/content/repositories/snapshots</url>
+        </snapshotRepository>
+    </distributionManagement>
 
     <dependencies>
         <dependency>
