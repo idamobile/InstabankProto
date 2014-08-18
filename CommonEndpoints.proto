@@ -40,6 +40,7 @@ message RegisterDevicePushIdRequestProtobufDTO {
     enum Platform {
         IOS = 0;
         ANDROID = 1;
+        NOKIA_X = 2;
     }
 
     optional Platform platform = 2 [default = IOS];
