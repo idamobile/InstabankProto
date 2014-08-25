@@ -5,6 +5,12 @@ message DiagnosticMessageProtobufDTO {
     required string info = 1;
 }
 
+enum Platform {
+    IOS = 0;
+    ANDROID = 1;
+    NOKIA_X = 2;
+}
+
 enum CommentType {
     REGULAR = 0;
     UNSUBSCRIBE = 1;
