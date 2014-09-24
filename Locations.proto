@@ -18,11 +18,25 @@ message LocationTypeProtobufDTO {
     required string kind = 3;
 }
 
+message LocationExtrasProtobufDTO {
+    //"button" or "text"
+    required string type = 1;
+    
+    //for "button" - Button label, "text" - Section title
+    required string name = 2; 
+    
+    //for "button" - url to open, "text" - text details
+    required string value = 3;
+}
+
 message LocationOwnerProtobufDTO {
     required string ownerId = 1;
     required string iconURL = 2;
     required string pinIconURL = 3;
     required string name = 4;
+    
+    //should be placed below all location details (including location extras)
+    repeated LocationExtrasProtobufDTO generalExtras = 5; 
 }
 
 message LocationProtobufDTO {
@@ -43,6 +57,9 @@ message LocationProtobufDTO {
 
     // ownerId from LocationOwnerProtobufDTO
     optional string ownerId = 11;
+    
+    //should be placed below all basic location details
+    repeated LocationExtrasProtobufDTO extras = 12;
 }
 
 message ClusterProtobufDTO {
