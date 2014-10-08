@@ -132,3 +132,12 @@ message GetTerminalAccountRequisitesProtobufResponseDTO {
     repeated FieldValueProtobufDTO fields = 1;
 }
 
+// endpoint URL: POST "/requestAccountStatement"
+// returns OK(200)
+// 422 if wrong email
+// 412 on other errors
+message AccountStatementRequestProtobufDTO {
+    required int64 sinceDate = 1;
+    required int64 toDate = 2;
+    required string email = 3;
+}
