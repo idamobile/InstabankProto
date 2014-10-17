@@ -134,10 +134,9 @@ message GetTerminalAccountRequisitesProtobufResponseDTO {
 
 // endpoint URL: POST "/requestAccountStatement"
 // returns OK(200)
-// 422 if wrong email
-// 412 on other errors
+// 412: invalid account type - statement available only for plastic cards
 message AccountStatementRequestProtobufDTO {
     required int64 sinceDate = 1;
     required int64 toDate = 2;
-    required string email = 3;
+    optional string email = 3;
 }
