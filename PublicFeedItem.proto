@@ -8,10 +8,16 @@ message PublicFeedDTO {
 }
 
 message PublicFeedItemDTO {
-   required string ownerId = 1;
-   required string transactionId = 2;
+   optional string ownerId = 1;
+   required string id = 2;
    required int64 sharedDate = 3;
-   required string imageResourceId = 4;
-   required string locationId = 5;
-   required string message = 6;
+   optional string imageResourceId = 4;
+   optional string locationId = 5;
+   optional string message = 6;
+}
+
+//id - item Id. Request items from that item(not included) count items.
+message PublicFeedRequestDTO {
+   optional string id =1;
+   required int32 count = 2;
 }
