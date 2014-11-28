@@ -16,7 +16,8 @@ message PublicFeedItemDTO {
    optional string message = 6;
 }
 
-//id - item Id. Request items from that item(not included) count items.
+//id - item Id. Request count items that were created earlier, than this item(not included).
+//count may be negative in case if search direction is reverted (find count items, that were before the id item)
 message PublicFeedRequestDTO {
    optional string id =1;
    required int32 count = 2;
