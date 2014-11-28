@@ -1,0 +1,17 @@
+option java_package = "com.idamobile.instabank.dto.protobuf";
+
+option java_outer_classname = "PublicFeed";
+
+
+message PublicFeedDTO {
+   repeated PublicFeedItemDTO items = 1;
+}
+
+message PublicFeedItemDTO {
+   required string ownerId = 1;
+   required string transactionId = 2;
+   required int64 sharedDate = 3;
+   required string imageResourceId = 4;
+   required string locationId = 5;
+   required string message = 6;
+}
