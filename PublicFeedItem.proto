@@ -11,9 +11,11 @@ message PublicFeedItemDTO {
    optional string ownerId = 1;
    required string id = 2;
    required int64 sharedDate = 3;
-   optional string imageResourceId = 4;
+   optional string imageURL = 4;
    optional string locationId = 5;
    optional string message = 6;
+   optional string currency = 7;
+   optional int64 amount = 8;
 }
 
 //id - item Id. Request count items that were created earlier, than this item(not included).
