@@ -2,6 +2,28 @@ option java_package = "com.idamobile.instabank.dto.protobuf";
 
 option java_outer_classname = "PublicFeed";
 
+// endpoints
+//      get public feed line:
+//          URL: "/requestPublicFeed"
+//              request: PublicFeedRequestDTO
+//                  id - item Id. Request count items that were created earlier, than this item(not included).
+//                  count may be negative in case if search direction is reverted (find count items, that were before the id item)
+//              returns: PublicFeedDTO
+//                  repeated<PublicFeedItemDTO>
+//                  note, that length may be smaller, than requested
+//
+//      save public feed line item:
+//          URL: "/addPublicFeedItem"
+//              request:  PublicFeedItemDTO
+//                  ownerId - transaction id
+//                  id, sharedDate, imageURL, currency - filled on server and any values will be ignored
+//                  message - user message to the transaction that will be shown in the public feed
+//                  locationid - location id
+//                  amount - any value indicates is user wants to share transaction amount. If empty - that user prefer to hide transaction amount
+//              returns: http code.
+//                  200 in case of success
+//                  412 if failed process image
+//                  500 any other error
 
 message PublicFeedDTO {
    repeated PublicFeedItemDTO items = 1;
@@ -18,11 +40,6 @@ message PublicFeedItemDTO {
    optional int64 amount = 8;
 }
 
-// endpoint URL: "/requestPublicFeed"
-// returns: PublicFeedDTO
-//
-//id - item Id. Request count items that were created earlier, than this item(not included).
-//count may be negative in case if search direction is reverted (find count items, that were before the id item)
 message PublicFeedRequestDTO {
    optional string id =1;
    required int32 count = 2;
