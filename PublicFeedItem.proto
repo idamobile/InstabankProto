@@ -20,10 +20,9 @@ option java_outer_classname = "PublicFeed";
 //                  message - user message to the transaction that will be shown in the public feed
 //                  locationid - location id
 //                  amount - any value indicates is user wants to share transaction amount. If empty - that user prefer to hide transaction amount
-//              returns: http code.
-//                  200 in case of success
-//                  412 if failed process image
-//                  500 any other error
+//              returns:
+//                  200 in case of success with saved instance that contains relative url for shared image
+//                  500 in case of error
 
 message PublicFeedDTO {
    repeated PublicFeedItemDTO items = 1;
