@@ -25,7 +25,7 @@ option java_outer_classname = "PublicFeed";
 //                  500 in case of error
 //     rate item:
 //          URL: "/ratePublicFeedItem"
-//              request: LikeItemDTO
+//              request: RateItemDTO
 //                  itemId item id that should be rated
 //                  rate true if user likes this item, false otherwise
 //              response: PublicFeedItemDTO
@@ -53,7 +53,7 @@ message PublicFeedRequestDTO {
    required int32 count = 2;
 }
 
-message LikeItemDTO{
+message RateItemDTO{
     required string itemId = 1;
     required bool rate = 2;
 }
