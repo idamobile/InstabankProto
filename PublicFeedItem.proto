@@ -23,6 +23,13 @@ option java_outer_classname = "PublicFeed";
 //              returns:
 //                  200 in case of success with saved instance that contains relative url for shared image
 //                  500 in case of error
+//     rate item:
+//          URL: "/ratePublicFeedItem"
+//              request: LikeItemDTO
+//                  itemId item id that should be rated
+//                  rate true if user likes this item, false otherwise
+//              response: PublicFeedItemDTO
+//                  contains all fields + updated rate
 
 message PublicFeedDTO {
    repeated PublicFeedItemDTO items = 1;
@@ -37,9 +44,16 @@ message PublicFeedItemDTO {
    optional string message = 6;
    optional string currency = 7;
    optional int64 amount = 8;
+   optional int32 likes = 9;
+   optional int32 dislikes = 10;
 }
 
 message PublicFeedRequestDTO {
-   optional string id =1;
+   optional string id = 1;
    required int32 count = 2;
+}
+
+message LikeItemDTO{
+    required string itemId = 1;
+    required bool rate = 2;
 }
