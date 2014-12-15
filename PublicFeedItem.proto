@@ -15,7 +15,7 @@ option java_outer_classname = "PublicFeed";
 //      save public feed line item:
 //          URL: "/addPublicFeedItem"
 //              request:  PublicFeedItemDTO
-//                  ownerId - transaction id
+//                  transactionalId - transaction id
 //                  id, sharedDate, imageURL, currency - filled on server and any values will be ignored
 //                  message - user message to the transaction that will be shown in the public feed
 //                  locationid - location id
@@ -37,15 +37,16 @@ message PublicFeedDTO {
 
 message PublicFeedItemDTO {
    optional string ownerId = 1;
-   required string id = 2;
-   required int64 sharedDate = 3;
-   optional string imageURL = 4;
-   optional string locationId = 5;
-   optional string message = 6;
-   optional string currency = 7;
-   optional int64 amount = 8;
-   optional int32 likes = 9;
-   optional bool liked = 10;
+   required string transactionalId = 2;
+   required string id = 3;
+   required int64 sharedDate = 4;
+   optional string imageURL = 5;
+   optional string locationId = 6;
+   optional string message = 7;
+   optional string currency = 8;
+   optional int64 amount = 9;
+   optional int32 likes = 10;
+   optional bool liked = 11;
 }
 
 message PublicFeedRequestDTO {
