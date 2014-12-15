@@ -27,7 +27,7 @@ option java_outer_classname = "PublicFeed";
 //          URL: "/ratePublicFeedItem"
 //              request: RateItemDTO
 //                  itemId item id that should be rated
-//                  rate true if user likes this item, false otherwise
+//                  rate true if user likes this item, false to call off like
 //              response: PublicFeedItemDTO
 //                  contains all fields + updated rate
 
@@ -45,7 +45,7 @@ message PublicFeedItemDTO {
    optional string currency = 7;
    optional int64 amount = 8;
    optional int32 likes = 9;
-   optional int32 dislikes = 10;
+   optional bool liked = 10;
 }
 
 message PublicFeedRequestDTO {
