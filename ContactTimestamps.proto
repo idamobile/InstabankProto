@@ -5,20 +5,20 @@ option java_outer_classname = "ContactTimestamps";
 // endpoints:
 //      get public feed line:
 //          URL: "/getContactTimestamps"
-//              request: PublicFeedRequestDTO
+//              request: ContactTimestampsRequestDTO
 //                  timestamp - request all changes contacts from the defined timestamp(not included)
-//              returns: PublicFeedDTO
-//                  repeated<ContactTimestamp>
+//              returns: ContactTimestampsDTO
+//                  repeated<ContactTimestampDTO>
 
 message ContactTimestampsRequestDTO {
    required int64 timestamp = 1;
 }
 
-message ContactTimestamps {
-   repeated ContactTimestamp items = 1;
+message ContactTimestampsDTO {
+   repeated ContactTimestampDTO items = 1;
 }
 
-message ContactTimestamp {
+message ContactTimestampDTO {
    required string userId = 1;
    required int64 timestamp = 2;
 }
