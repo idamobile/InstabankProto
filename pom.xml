@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.idamobile.instabank</groupId>
     <artifactId>protobuf-dto</artifactId>
-    <version>1.13-SNAPSHOT</version>
+    <version>1.13</version>
     <name>${project.groupId}:${project.artifactId}</name>
     <packaging>jar</packaging>
     <inceptionYear>2014</inceptionYear>
@@ -11,7 +11,7 @@
 
     <scm>
         <connection>scm:git:git@github.com:idamobile/InstabankProto.git</connection>
-      <tag>HEAD</tag>
+      <tag>protobuf-dto-1.13</tag>
   </scm>
 
     <properties>
