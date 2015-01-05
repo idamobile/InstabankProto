@@ -70,6 +70,13 @@ message FetchCommonActivitiesRequestDTO {
     optional string edgeItemId = 3;
 }
 
+// URL: POST "/fetchFinancialFeed"
+// returns repeated<EntityContainerProtobufDTO>
+message FetchFinancialFeedRequestDTO {
+    required int32 limit = 1;
+    optional string edgeItemId = 2;
+}
+
 // endpoint URL: "/unsubscribe"
 // returns HTTP_OK or error
 message UnsubscribeRequestProtobufDTO {
