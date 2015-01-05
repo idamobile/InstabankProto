@@ -11,7 +11,7 @@ option java_outer_classname = "ContactTimestamps";
 //                  repeated<ContactTimestampDTO>
 
 message ContactTimestampsRequestDTO {
-   required int64 timestamp = 1;
+   optional int64 timestamp = 1;
 }
 
 message ContactTimestampsDTO {
