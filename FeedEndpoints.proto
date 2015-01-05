@@ -56,6 +56,10 @@ message SmartFetchActivityResponseProtobufDTO {
     repeated EntityContainerProtobufDTO requestedItems = 2;
 }
 
+message MultipleEntityContainerProtobufDTO {
+    repeated EntityContainerProtobufDTO items = 1;
+}
+
 // endpoint URL: "/fetchSingleEntity"
 // returns EntityContainerProtobufDTO
 message FetchSingleEntityRequestProtobufDTO {
@@ -63,7 +67,7 @@ message FetchSingleEntityRequestProtobufDTO {
 }
 
 // URL: POST "/fetchCommonActivities"
-// returns repeated<EntityContainerProtobufDTO>
+// returns MultipleEntityContainerProtobufDTO
 message FetchCommonActivitiesRequestDTO {
     required string friendId = 1;
     required int32 limit = 2;
@@ -71,7 +75,7 @@ message FetchCommonActivitiesRequestDTO {
 }
 
 // URL: POST "/fetchFinancialFeed"
-// returns repeated<EntityContainerProtobufDTO>
+// returns MultipleEntityContainerProtobufDTO
 message FetchFinancialFeedRequestDTO {
     required int32 limit = 1;
     optional string edgeItemId = 2;

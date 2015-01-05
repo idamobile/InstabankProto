@@ -2,19 +2,13 @@ option java_package = "com.idamobile.instabank.dto.protobuf";
 
 option java_outer_classname = "ContactTimestamps";
 
-// endpoints:
-//      get public feed line:
-//          URL: "/getContactTimestamps"
-//              request: ContactTimestampsRequestDTO
-//                  timestamp - request all changes contacts from the defined timestamp(not included)
-//              returns: ContactTimestampsDTO
-//                  repeated<ContactTimestampDTO>
-
+//endpoint URL: POST "/getContactTimestamps"
+//returns ContactTimestampsResponseDTO
 message ContactTimestampsRequestDTO {
    optional int64 timestamp = 1;
 }
 
-message ContactTimestampsDTO {
+message ContactTimestampsResponseDTO {
    repeated ContactTimestampDTO items = 1;
 }
 
