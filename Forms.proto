@@ -84,12 +84,3 @@ message BeneficiaryCategory {
     optional string logoResource = 3;
     repeated Beneficiary beneficiaries = 4;
 }
-
-
-message Template {
-    required string id = 1;
-    required string name = 2;
-    required Form form = 3;
-    required FilledForm filledForm = 4;
-    required string beneficiaryId = 5;
-}

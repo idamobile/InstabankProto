@@ -19,6 +19,8 @@ message CreateTransferMoneyRequestProtobufDTO {
     required bool existingUser = 4;
     optional string fbAccessToken = 5;
     optional string requestId = 6;
+    // if populated new template will be created
+    optional string templateName = 7;
 }
 
 // endpoint URL: "/fulfillMoneyRequest"
@@ -48,6 +50,8 @@ message WithdrawRequestProtobufDTO {
     *  "PAYMENT_ACCOUNT" - should not be displayed on client; used as a source account for payments
     */
     repeated FieldValueProtobufDTO requisites = 3;
+    // if populated new template will be created
+    optional string templateName = 4;
 }
 
 // endpoint URL "/getExternalTransferCommission"
@@ -97,6 +101,8 @@ message PerformPaymentProtobufRequestDTO {
     required int64 amount = 2;
     optional int64 commission = 3;
     optional string requestId = 4;
+    // if populated new template will be created
+    optional string templateName = 5;
 }
 
 //endpoint URL: "/getNextPaymentForm"
@@ -110,24 +116,6 @@ message GetNextFormProtobufResponseDTO {
     required FilledForm filledFormDTO = 1;
     required Form formDTO = 2;
 }
-
-//endpoint URL: GET "/getTemplates"
-message GetTemplatesProtobufResponseDTO {
-    repeated Template templates = 1;
-}
-
-//endpoint URL: "/makeTemplate"
-//return MakeTemplateResponseDTO
-message MakeTemplateProtobufRequestDTO {
-    required string name = 1;
-    required string beneficiaryId = 2;
-    required FilledForm filledForm = 3;
-}
-
-message MakeTemplateProtobufResponseDTO {
-    required Template template = 1;
-}
-
 
 //endpoint URL: "/getStandardForms"
 message GetStandardFormsRequestProtobufDTO {
