@@ -1,0 +1,65 @@
+option java_package = "com.idamobile.instabank.dto.protobuf";
+
+option java_outer_classname = "Templates";
+
+import "Forms.proto";
+
+/**
+ Resource referenced by template for displaying a proper image.
+ It could be either user or beneficiary
+*/
+message TemplateResource {
+
+	required ResourceType type = 1;
+	required string resourceId = 2;
+
+	enum ResourceType {
+		USER = 1;
+		BENEFICIARY = 2;
+	}
+}
+
+message Template {
+
+	required string templateId = 1;
+	required string name = 2;
+	required TemplateType type = 3;
+	required int64 lastPayedTimestamp = 4;
+	optional TemplateResource resource = 5;
+	optional int32 pinnedIndex = 6; 
+
+	enum TemplateType {
+		INTERNAL_TRANSFER = 1;		
+		BENEFICIARY_PAYMENT = 3;
+		WIRE_TRANSFER = 2;
+	}
+}
+
+//endpoint URL: GET "/templates/{templateId}"
+// returns TemplateData
+message TemplateData {
+	optional string formId = 1;
+	repeated FieldValue values = 2;
+}
+
+//endpoint URL: POST "/createTemplate"
+//returns HTTP 200
+message CreateTemplateRequest {
+	required string orderId = 1;
+	repeated string templateName = 2;
+}
+
+//endpoint URL: GET "/templates"
+// returns TemplatesResponse
+message TemplatesResponse {
+	repeated Template template = 1;
+}
+
+//endpoint URL: POST "/templates/{templateId}"
+// returns Template
+message EditTemplateRequest {
+	required string templateId = 1;
+	required string name = 2;
+	optional int32 pinnedIndex = 3; 
+}
+
