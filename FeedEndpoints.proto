@@ -79,6 +79,7 @@ message FetchCommonActivitiesRequestDTO {
 message FetchFinancialFeedRequestDTO {
     required int32 limit = 1;
     optional string edgeItemId = 2;
+    optional int64 lastItemTimestamp = 3;
 }
 
 // endpoint URL: "/unsubscribe"
