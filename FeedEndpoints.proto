@@ -68,6 +68,8 @@ message FetchSingleEntityRequestProtobufDTO {
 
 // URL: POST "/fetchCommonActivities"
 // returns MultipleEntityContainerProtobufDTO
+// params:
+//  edgeItemId - exlusive
 message FetchCommonActivitiesRequestDTO {
     required string friendId = 1;
     required int32 limit = 2;
@@ -76,10 +78,13 @@ message FetchCommonActivitiesRequestDTO {
 
 // URL: POST "/fetchFinancialFeed"
 // returns MultipleEntityContainerProtobufDTO
+// params:
+//  edgeItemId - exlusive
+//  beforeDate - inclusive (has priority over edgeItemId)
 message FetchFinancialFeedRequestDTO {
     required int32 limit = 1;
     optional string edgeItemId = 2;
-    optional int64 lastItemTimestamp = 3;
+    optional int64 beforeDate = 3;
 }
 
 // endpoint URL: "/unsubscribe"
