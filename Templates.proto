@@ -42,8 +42,8 @@ message TemplateData {
 	repeated FieldValue values = 2;
 }
 
-//endpoint URL: POST "/createTemplate"
-//returns HTTP 200
+//endpoint URL: POST "/templates/create"
+// returns Template
 message CreateTemplateRequest {
 	required string orderId = 1;
 	repeated string templateName = 2;
