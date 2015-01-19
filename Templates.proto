@@ -46,7 +46,7 @@ message TemplateData {
 // returns Template
 message CreateTemplateRequest {
 	required string orderId = 1;
-	repeated string templateName = 2;
+	required string templateName = 2;
 }
 
 //endpoint URL: GET "/templates"
