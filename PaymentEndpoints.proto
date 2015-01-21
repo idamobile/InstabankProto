@@ -19,8 +19,16 @@ message CreateTransferMoneyRequestProtobufDTO {
     required bool existingUser = 4;
     optional string fbAccessToken = 5;
     optional string requestId = 6;
+
     // if populated new template will be created
     optional string templateName = 7;
+    // if populated template will be attached to order
+    optional string templateId = 8;
+    /*
+        {templateName, templateId} are exclusive parameters, 
+        i.e. only one should be populated or none of them,
+        otherwise it will call an IllegalArgumentException
+    */
 }
 
 // endpoint URL: "/fulfillMoneyRequest"
@@ -50,8 +58,15 @@ message WithdrawRequestProtobufDTO {
     *  "PAYMENT_ACCOUNT" - should not be displayed on client; used as a source account for payments
     */
     repeated FieldValueProtobufDTO requisites = 3;
-    // if populated new template will be created
+     // if populated new template will be created
     optional string templateName = 4;
+    // if populated template will be attached to order
+    optional string templateId = 5;
+    /*
+        {templateName, templateId} are exclusive parameters, 
+        i.e. only one should be populated or none of them,
+        otherwise it will call an IllegalArgumentException
+    */
 }
 
 // endpoint URL "/getExternalTransferCommission"
@@ -103,6 +118,13 @@ message PerformPaymentProtobufRequestDTO {
     optional string requestId = 4;
     // if populated new template will be created
     optional string templateName = 5;
+    // if populated template will be attached to order
+    optional string templateId = 6;
+    /*
+        {templateName, templateId} are exclusive parameters, 
+        i.e. only one should be populated or none of them,
+        otherwise it will call an IllegalArgumentException
+    */
 }
 
 //endpoint URL: "/getNextPaymentForm"
