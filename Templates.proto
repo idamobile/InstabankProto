@@ -4,28 +4,13 @@ option java_outer_classname = "Templates";
 
 import "Forms.proto";
 
-/**
- Resource referenced by template for displaying a proper image.
- It could be either user or beneficiary
-*/
-message TemplateResource {
-
-	required ResourceType type = 1;
-	required string resourceId = 2;
-
-	enum ResourceType {
-		USER = 1;
-		BENEFICIARY = 2;
-	}
-}
-
 message Template {
 
 	required string templateId = 1;
 	required string name = 2;
 	required TemplateType type = 3;
 	required int64 lastPayedTimestamp = 4;
-	optional TemplateResource resource = 5;
+	optional string resourceId = 5;
 	optional int32 pinnedIndex = 6; 
 
 	enum TemplateType {
@@ -38,8 +23,7 @@ message Template {
 //endpoint URL: GET "/templates/{templateId}"
 // returns TemplateData
 message TemplateData {
-	optional string formId = 1;
-	repeated FieldValue values = 2;
+	repeated FieldValue values = 1;
 }
 
 //endpoint URL: POST "/templates/create"
