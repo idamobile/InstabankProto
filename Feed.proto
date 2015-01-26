@@ -1,0 +1,9 @@
+option java_package = "com.idamobile.instabank.dto.protobuf";
+option java_outer_classname = "Feed";
+
+// Request for any feed that contains ordered objects
+// The contract is described in detail under POLICY-8 (http://instabank.myjetbrains.com/youtrack/issue/policy-8)
+message FeedRequestDTO {
+   optional string id = 1;
+   required int32 count = 2;
+}

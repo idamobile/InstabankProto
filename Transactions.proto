@@ -1,0 +1,83 @@
+option java_package = "com.idamobile.instabank.dto.protobuf";
+option java_outer_classname = "Transactions";
+
+message TransactionFeedDTO {
+    repeated TransactionDTO items = 1;
+}
+
+message TransactionDTO {
+    // Timestamp when transaction is first seen by the system
+    required int64 timestamp = 1;
+
+    // Authorization id (provided by bank). Optional, null for back office transactions.
+    optional string authId = 2;
+
+    // Financial id (provided by bank). Optional, null for authorizations that are not yet cleared
+    optional string finId = 3;
+
+    // Presence of this field indicates that transaction has been canceled and stores timestamp when that happened
+    optional int64 canceled = 4;
+
+    // Terminal description
+    optional TerminalDTO terminal = 5;
+
+    // Authorization
+    optional AuthorizationDTO auth = 6;
+
+    // Clearings
+    repeated ClearingDTO clearings = 7;
+
+    // Human readable transaction message (typically as specified by merchant)
+    required string message = 8;
+
+    // ???
+    required string title = 9;
+}
+
+message AuthorizationDTO {
+    // Authorization timestamp
+    required int64 timestamp = 1;
+
+    // Original transaction currency code
+    optional string origCurrency = 2;
+
+    // Original amount of funds, measured in original transaction currency
+    required int64 origAmount = 3;
+
+    // Amount of funds applied to account, measured in account currency
+    required int64 billAmount = 4;
+
+    // Amount of funds commissioned for this transaction, measured in account currency
+    optional int64 commAmount = 5;
+
+    // Amount of funds reported by bank as 'remaining balance', measured in account currency
+    required int64 balance = 6;
+
+    // Do we really need this?
+    optional string broker = 7;
+}
+
+message ClearingDTO {
+    // The moment, when clearing has occured, according to bank's records (financial date).
+    required int64 timestamp = 1;
+
+    // Original transaction currency code
+    optional string origCurrency = 2;
+
+    // Original amount of funds, measured in original transaction currency
+    required int64 origAmount = 3;
+
+    // Amount of funds applied to account, measured in account currency
+    required int64 billAmount = 4;
+}
+
+message TerminalDTO {
+    optional string id = 1;
+    optional string name = 2;
+    optional string sic = 3;
+    optional string country = 4;
+    optional string city = 5;
+    optional string location = 6;
+    optional string desc = 7;
+    optional string retailer = 8;
+}
