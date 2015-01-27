@@ -1,15 +1,26 @@
 option java_package = "com.idamobile.instabank.dto.protobuf";
 option java_outer_classname = "Transactions";
 
-message TransactionFeedDTO {
-    repeated TransactionDTO items = 1;
+import "Commons.proto";
+import "Order.proto";
+
+// Return for endpoint: fetchDrafts
+// NOTE: For request, Use standard feed request (FeedRequestDTO) for this endpoint
+message DraftFeedProtobufDTO {
+    repeated DraftProtobufDTO items = 1;
 }
 
-message TransactionDTO {
+// Draft is an abstract container that might contany any of the following:
+// order - details on payment order
+// auth - authorization transaction details
+// clearings - clearing transactions detail
+// The contract requres that at least one of these is present, however there are no other assumptions.
+message DraftProtobufDTO {
     // Timestamp when transaction is first seen by the system
     required int64 timestamp = 1;
 
     // Authorization id (provided by bank). Optional, null for back office transactions.
+    // Note that for we might have authId but not have authorization id but not have authorization transaction itself
     optional string authId = 2;
 
     // Financial id (provided by bank). Optional, null for authorizations that are not yet cleared
@@ -18,23 +29,42 @@ message TransactionDTO {
     // Presence of this field indicates that transaction has been canceled and stores timestamp when that happened
     optional int64 canceled = 4;
 
-    // Terminal description
-    optional TerminalDTO terminal = 5;
+    // Payment Order
+    optional OrderProtobufDTO order = 5;
 
     // Authorization
-    optional AuthorizationDTO auth = 6;
+    optional AuthorizationProtobufDTO auth = 6;
 
     // Clearings
-    repeated ClearingDTO clearings = 7;
+    repeated ClearingProtobufDTO clearings = 7;
 
     // Human readable transaction message (typically as specified by merchant)
     required string message = 8;
 
     // ???
     required string title = 9;
+
+    // Calculated transaction class
+    optional TransactionClass clazz = 10;
+
+    // Calculated transaction category
+    optional string categoryId = 11;
+
+    // Terminal description. Terminal data comes aggregated from all transactions
+    // with data from authorization taking priority over financial.
+    optional TerminalProtobufDTO terminal = 12;
+
+    // User-defined transaction category
+    optional string userCategoryId = 21;
+
+    // Envelope bound to the authId
+    optional EnvelopeProtobufDTO authEnvelope = 22;
+
+    // Envelope bound to the finId
+    optional EnvelopeProtobufDTO finEnvelope = 23;
 }
 
-message AuthorizationDTO {
+message AuthorizationProtobufDTO {
     // Authorization timestamp
     required int64 timestamp = 1;
 
@@ -54,10 +84,10 @@ message AuthorizationDTO {
     required int64 balance = 6;
 
     // Do we really need this?
-    optional string broker = 7;
+    //optional string broker = 8;
 }
 
-message ClearingDTO {
+message ClearingProtobufDTO {
     // The moment, when clearing has occured, according to bank's records (financial date).
     required int64 timestamp = 1;
 
@@ -71,7 +101,7 @@ message ClearingDTO {
     required int64 billAmount = 4;
 }
 
-message TerminalDTO {
+message TerminalProtobufDTO {
     optional string id = 1;
     optional string name = 2;
     optional string sic = 3;

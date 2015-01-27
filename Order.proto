@@ -1,0 +1,12 @@
+option java_package = "com.idamobile.instabank.dto.protobuf";
+option java_outer_classname = "Orders";
+
+import "Commons.proto";
+
+message OrderProtobufDTO {
+   required string id = 1;
+   required int64 amount = 2;
+   required int64 timestamp = 3;
+
+   optional EnvelopeProtobufDTO envelope = 4;
+}
