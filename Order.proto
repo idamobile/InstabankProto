@@ -2,11 +2,18 @@ option java_package = "com.idamobile.instabank.dto.protobuf";
 option java_outer_classname = "Orders";
 
 import "Commons.proto";
+import "Templates.proto";
 
 message OrderProtobufDTO {
    required string id = 1;
+   // Amount to be paid, measured in account currency
    required int64 amount = 2;
+   // Timestamp when this order was created
    required int64 timestamp = 3;
+   // Order type
+   required Template.TemplateType type = 4;
+   // JSON string containing requisites map
+   required string requisites = 5;
 
-   optional EnvelopeProtobufDTO envelope = 4;
+   optional EnvelopeProtobufDTO envelope = 6;
 }

@@ -38,12 +38,6 @@ message DraftProtobufDTO {
     // Clearings
     repeated ClearingProtobufDTO clearings = 7;
 
-    // Human readable transaction message (typically as specified by merchant)
-    required string message = 8;
-
-    // ???
-    required string title = 9;
-
     // Calculated transaction class
     optional TransactionClass clazz = 10;
 
@@ -83,6 +77,12 @@ message AuthorizationProtobufDTO {
     // Amount of funds reported by bank as 'remaining balance', measured in account currency
     required int64 balance = 6;
 
+    // Human readable transaction message (typically as specified by merchant)
+    required string message = 7;
+
+    // Transaction title (human readable text provided by bank)
+    required string title = 8;
+
     // Do we really need this?
     //optional string broker = 8;
 }
@@ -99,6 +99,10 @@ message ClearingProtobufDTO {
 
     // Amount of funds applied to account, measured in account currency
     required int64 billAmount = 4;
+
+    // Transaction title (human readable text provided by bank)
+    required string title = 8;
+
 }
 
 message TerminalProtobufDTO {
