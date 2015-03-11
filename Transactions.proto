@@ -38,6 +38,10 @@ message DraftProtobufDTO {
     // Clearings
     repeated ClearingProtobufDTO clearings = 7;
 
+    // The moment, when authorization  has occured, according to bank's records.
+    // Placed on top level because it might originate both from authorization or clearing
+    required int64 authTimestamp = 8;
+
     // Calculated transaction class
     optional TransactionClass clazz = 10;
 
@@ -59,9 +63,6 @@ message DraftProtobufDTO {
 }
 
 message AuthorizationProtobufDTO {
-    // Authorization timestamp
-    required int64 timestamp = 1;
-
     // Original transaction currency code
     optional string origCurrency = 2;
 
