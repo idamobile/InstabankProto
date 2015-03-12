@@ -40,7 +40,7 @@ message DraftProtobufDTO {
 
     // The moment, when authorization  has occured, according to bank's records.
     // Placed on top level because it might originate both from authorization or clearing
-    required int64 authTimestamp = 8;
+    optional int64 authTimestamp = 8;
 
     // Calculated transaction class
     optional TransactionClass clazz = 10;
@@ -96,7 +96,7 @@ message ClearingProtobufDTO {
     optional string origCurrency = 2;
 
     // Original amount of funds, measured in original transaction currency
-    required int64 origAmount = 3;
+    optional int64 origAmount = 3;
 
     // Amount of funds applied to account, measured in account currency
     required int64 billAmount = 4;
